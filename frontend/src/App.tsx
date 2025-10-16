@@ -2,6 +2,7 @@ import './App.css'
 
 import {Route, Routes} from "react-router-dom";
 import AllHalls from "./CinemaHalls/AllHalls.tsx";
+import NewHallForm from "./CinemaHalls/NewHallForm.tsx";
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
     <h1>Cinema Manager</h1>
         <Routes>
             <Route path={"/allHalls"} element={<AllHalls/>}/>
+            <Route path={"/newHall"} element={<NewHallForm/>}/>
         </Routes>
     </>
   )
