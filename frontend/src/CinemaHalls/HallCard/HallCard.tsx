@@ -21,10 +21,10 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             <h3>Name: {props.hall.name}</h3>
             <div className={"rows"}>
                 <hr/>
-                {[...Array(props.hall.rows)].map(() =>
-                    <div className={"seatsPerRow"}>
-                        {[...Array(props.hall.seatsPerRow)].map(() =>
-                            <Seats/>
+                {[...Array(props.hall.rows)].map((row) =>
+                    <div className={"seatsPerRow"} key={row}>
+                        {[...Array(props.hall.seatsPerRow)].map((seat) =>
+                            <Seats key={seat}/>
                         )}
                     </div>
                 )}

@@ -1,8 +1,7 @@
 import './Seats.css'
-export default function Seats(){
+
+export default function Seats() {
     return (
-        <>
-            <span className="circle"></span>
-        </>
+        <span className="circle"></span>
     )
 }
