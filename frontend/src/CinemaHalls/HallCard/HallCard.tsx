@@ -1,11 +1,20 @@
 import type {CinemaHall} from "../../model/CinemaHall.ts";
 import './HallCard.css';
+import axios from "axios";
 import Seats from "./Seats/Seats.tsx";
 
 type HallCardProps = {
     hall: CinemaHall
+    deleteHall: (id: string)=>void
 }
 export default function HallCard(props: Readonly<HallCardProps>) {
+
+    function deleteHall(){
+        axios.delete("/api/halls/"+ props.hall.id)
+            .then(() => deleteHall())
+            .catch(e => console.log(e))
+    }
+
     return (
         <div className={"hall-card"}>
             <h3>Id: {props.hall.id}</h3>
@@ -20,6 +29,7 @@ export default function HallCard(props: Readonly<HallCardProps>) {
                     </div>
                 )}
             </div>
+            <button onClick={deleteHall}>Delete</button>
         </div>
     )
 }
