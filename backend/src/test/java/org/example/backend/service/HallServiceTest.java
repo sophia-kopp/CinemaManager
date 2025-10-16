@@ -15,11 +15,13 @@ import static org.mockito.Mockito.mock;
 class HallServiceTest {
     private HallRepo mockRepo;
     private HallService hallService;
+    private IdService mockIdService;
 
     @BeforeEach
     void setup() {
         mockRepo = mock(HallRepo.class);
-        hallService = new HallService(mockRepo);
+        mockIdService = mock(IdService.class);
+        hallService = new HallService(mockRepo, mockIdService);
     }
 
     @Test
@@ -44,14 +46,16 @@ class HallServiceTest {
         //GIVEN
 
         CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
-        //CinemaHallDto hallDto = new CinemaHallDto("test2", 8, 8);
+        CinemaHallDto hallDto = new CinemaHallDto("test1", 4, 4);
 
         //WHEN
         when(mockRepo.save(hall)).thenReturn(hall);
-        CinemaHall actual = hallService.addNewHall(hall);
+        when(mockIdService.generateUUid()).thenReturn("1");
+        CinemaHall actual = hallService.addNewHall(hallDto);
 
         //THEN
         verify(mockRepo).save(hall);
+        verify(mockIdService).generateUUid();
         assertEquals(hall, actual);
     }
 }
