@@ -5,7 +5,6 @@ import org.example.backend.model.CinemaHallDto;
 import org.example.backend.repo.HallRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ class HallServiceTest {
         //GIVEN
 
         CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
-        CinemaHallDto hallDto = new CinemaHallDto("test2", 8, 8);
+        //CinemaHallDto hallDto = new CinemaHallDto("test2", 8, 8);
 
         //WHEN
         when(mockRepo.save(hall)).thenReturn(hall);
