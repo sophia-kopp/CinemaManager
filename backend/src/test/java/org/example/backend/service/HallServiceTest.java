@@ -50,12 +50,12 @@ class HallServiceTest {
 
         //WHEN
         when(mockRepo.save(hall)).thenReturn(hall);
-        when(mockIdService.getIdForHalls()).thenReturn("1");
+        when(mockIdService.generateUUid()).thenReturn("1");
         CinemaHall actual = hallService.addNewHall(hallDto);
 
         //THEN
         verify(mockRepo).save(hall);
-        verify(mockIdService).getIdForHalls();
+        verify(mockIdService).generateUUid();
         assertEquals(hall, actual);
     }
 }

@@ -9,7 +9,6 @@ import java.util.UUID;
 public class IdService {
 
     private final HallRepo hallRepo;
-
     public IdService(HallRepo hallRepo) {
         this.hallRepo = hallRepo;
     }
@@ -18,9 +17,4 @@ public class IdService {
         return UUID.randomUUID().toString();
     }
 
-    public String getIdForHalls(){
-        int currentAmountOfHalls = hallRepo.findAll().size();
-        String newHallId = String.valueOf(currentAmountOfHalls +1);
-        return newHallId;
-    }
 }

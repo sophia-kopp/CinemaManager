@@ -24,7 +24,7 @@ public class HallService {
 
     public CinemaHall addNewHall(CinemaHallDto hallDto) {
         CinemaHall newHall = CinemaHall.builder()
-                .id(idService.getIdForHalls())
+                .id(idService.generateUUid())
                 .name(hallDto.name())
                 .rows(hallDto.rows())
                 .seatsPerRow(hallDto.seatsPerRow())
