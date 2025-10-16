@@ -2,7 +2,6 @@ import type {CinemaHall} from "../../model/CinemaHall.ts";
 import './HallCard.css';
 import Seats from "./Seats/Seats.tsx";
 import axios from "axios";
-import Seats from "./Seats/Seats.tsx";
 
 type HallCardProps = {
     hall: CinemaHall
