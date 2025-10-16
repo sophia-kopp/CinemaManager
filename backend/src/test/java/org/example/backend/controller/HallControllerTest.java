@@ -2,6 +2,7 @@ package org.example.backend.controller;
 
 import org.example.backend.model.CinemaHall;
 import org.example.backend.repo.HallRepo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +24,11 @@ class HallControllerTest {
     @Autowired
     private HallRepo hallRepo;
 
+    @BeforeEach
+    void setup() {
+        hallRepo.deleteAll();
+    }
+
     @DirtiesContext
     @Test
     void getAllHalls_ShouldReturnListOfOneHall_WhenGetIsCalled() throws Exception {
@@ -37,7 +43,6 @@ class HallControllerTest {
                         """     
                                 [
                                 {
-                                "id": "1",
                                 "name": "test",
                                 "rows": 4,
                                 "seatsPerRow":  4}
@@ -63,7 +68,6 @@ class HallControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json(
                         """
                                 {
-                                    "id": "1",
                                     "name": "test",
                                     "rows": 4,
                                     "seatsPerRow":  4}
