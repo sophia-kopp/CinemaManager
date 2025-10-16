@@ -26,4 +26,9 @@ public class HallController {
     public CinemaHall addNewHall(@RequestBody CinemaHallDto hallDto){
         return service.addNewHall(hallDto);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteHall(@PathVariable String id){
+        service.deleteHall(id);
+    }
 }

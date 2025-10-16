@@ -11,8 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -51,19 +51,20 @@ class HallControllerTest {
                 ));
     }
 
+
     @Test
     void addNewHall_ShouldReturnHall_WhenNewHallIsAdded() throws Exception {
         mockMvc.perform(post("/api/halls")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(
-                            """
-                                    {
-                                    "id": "1",
-                                    "name": "test",
-                                    "rows": 4,
-                                    "seatsPerRow":  4}
-                                    """
-                    ))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "id": "1",
+                                        "name": "test",
+                                        "rows": 4,
+                                        "seatsPerRow":  4}
+                                        """
+                        ))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(
                         """
@@ -73,5 +74,13 @@ class HallControllerTest {
                                     "seatsPerRow":  4}
                                 """
                 ));
+    }
+    @Test
+    void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted() throws Exception {
+        CinemaHall hall = new CinemaHall("1", "test", 4, 4);
+        hallRepo.save(hall);
+        mockMvc.perform(delete("/api/halls/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 }
