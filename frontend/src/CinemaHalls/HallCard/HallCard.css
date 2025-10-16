@@ -3,17 +3,31 @@
     border-radius: 5px;
 }
 
-.rows{
+.rows {
     margin: 0 75px 0;
     border: #1a1a1a solid 1px;
     flex-direction: row;
 
 }
-.rows hr{
+
+.screen {
     margin: 5px 40px 5px;
-    height: 10px;
+    height: 20px;
     background-color: white;
 }
-.seatsPerRow{
+
+.screen h5 {
+    color: black;
+    margin: unset;
+}
+
+.seatsPerRow {
     flex-direction: column;
+}
+
+.buttons{
+    padding: 15px;
+}
+.button-copied{
+    background-color: green;
 }
