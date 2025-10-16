@@ -2,3 +2,32 @@
     background-color: #535bf2;
     border-radius: 5px;
 }
+
+.rows {
+    margin: 0 75px 0;
+    border: #1a1a1a solid 1px;
+    flex-direction: row;
+
+}
+
+.screen {
+    margin: 5px 40px 5px;
+    height: 20px;
+    background-color: white;
+}
+
+.screen h5 {
+    color: black;
+    margin: unset;
+}
+
+.seatsPerRow {
+    flex-direction: column;
+}
+
+.buttons{
+    padding: 15px;
+}
+.button-copied{
+    background-color: green;
+}
