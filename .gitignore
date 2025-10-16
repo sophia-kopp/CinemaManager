@@ -18,3 +18,4 @@
 /frontend/dist-ssr
 /frontend/*.local
 /frontend/npm-debug.log*
+/frontend/src/model/template
