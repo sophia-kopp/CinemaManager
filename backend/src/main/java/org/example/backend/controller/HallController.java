@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.CinemaHall;
+import org.example.backend.model.CinemaHallDto;
 import org.example.backend.service.HallService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class HallController {
     }
 
     @PostMapping
-    public CinemaHall addNewHall(@RequestBody CinemaHall hall){
-        return service.addNewHall(hall);
+    public CinemaHall addNewHall(@RequestBody CinemaHallDto hallDto){
+        return service.addNewHall(hallDto);
     }
 }
