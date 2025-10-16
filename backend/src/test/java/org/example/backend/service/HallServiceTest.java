@@ -1,6 +1,7 @@
 package org.example.backend.service;
 
 import org.example.backend.model.CinemaHall;
+import org.example.backend.model.CinemaHallDto;
 import org.example.backend.repo.HallRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,18 @@ class HallServiceTest {
     }
 
     @Test
-    void addNewHall() {
+    void addNewHall_ShouldReturnHall_WhenHallIsAdded () {
+        //GIVEN
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
+        CinemaHallDto hallDto = new CinemaHallDto("test2", 8, 8);
+
+        //WHEN
+        when(mockRepo.save(hall)).thenReturn(hall);
+        CinemaHall actual = hallService.addNewHall(hall);
+
+        //THEN
+        verify(mockRepo).save(hall);
+        assertEquals(hall, actual);
     }
 }

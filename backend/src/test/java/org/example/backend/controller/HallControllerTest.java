@@ -6,12 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -47,6 +49,28 @@ class HallControllerTest {
     }
 
     @Test
-    void addNewHall() {
+    void addNewHall_ShouldReturnHall_WhenNewHallIsAdded() throws Exception {
+        CinemaHall hall = new CinemaHall("1", "test", 4, 4);
+        mockMvc.perform(post("/api/halls")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(
+                            """
+                                    {
+                                    "id": "1",
+                                    "name": "test",
+                                    "rows": 4,
+                                    "seatsPerRow":  4}
+                                    """
+                    ))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                {
+                                    "id": "1",
+                                    "name": "test",
+                                    "rows": 4,
+                                    "seatsPerRow":  4}
+                                """
+                ));
     }
 }
