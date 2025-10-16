@@ -31,4 +31,8 @@ public class HallService {
                 .build();
         return repo.save(newHall);
     }
+
+    public void deleteHall(String id) {
+        repo.deleteById(id);
+    }
 }
