@@ -37,7 +37,7 @@ public class HallService {
 
     public ResponseEntity<String> deleteHall(String id) {
         CinemaHall existingHall = repo.findById(id)
-                .orElseThrow(()-> new HallNotFoundException("Hall not found with id" + id));
+                .orElseThrow(()-> new HallNotFoundException("Hall not found with id: " + id));
         repo.deleteById(existingHall.id());
         return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted.");
     }

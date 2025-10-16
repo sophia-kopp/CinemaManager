@@ -1,5 +1,6 @@
 package org.example.backend.service;
 
+import org.example.backend.exceptions.HallNotFoundException;
 import org.example.backend.model.CinemaHall;
 import org.example.backend.model.CinemaHallDto;
 import org.example.backend.repo.HallRepo;
@@ -44,7 +45,7 @@ class HallServiceTest {
     }
 
     @Test
-    void addNewHall_ShouldReturnHall_WhenHallIsAdded () {
+    void addNewHall_ShouldReturnHall_WhenHallIsAdded() {
         //GIVEN
 
         CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
@@ -60,16 +61,15 @@ class HallServiceTest {
         verify(mockIdService).generateUUid();
         assertEquals(hall, actual);
     }
-    @Test
-    void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted () {
-        //GIVEN
 
+    @Test
+    void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted() {
+        //GIVEN
         CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
 
         //WHEN
         //when(mockRepo.save(hall)).thenReturn(hall);
         when(mockRepo.findById("1")).thenReturn(Optional.of(hall));
-
         ResponseEntity<String> actual = hallService.deleteHall("1");
 
         //THEN
@@ -78,6 +78,17 @@ class HallServiceTest {
         verify(mockRepo).deleteById("1");
         assertEquals("Successfully deleted.", actual.getBody());
         assertTrue(actual.getStatusCode().is2xxSuccessful());
+    }
 
+    @Test
+    void deleteHall_ShouldThrowException_WhenNoHallFound() {
+        //THEN
+        doNothing().when(mockRepo).deleteById("1");
+        when(mockRepo.existsById("1")).thenReturn(false);
+
+        HallNotFoundException exception = assertThrows(HallNotFoundException.class, () ->
+            hallService.deleteHall("1"));
+
+        assertEquals("Hall not found with id: 1", exception.getMessage());
     }
 }
