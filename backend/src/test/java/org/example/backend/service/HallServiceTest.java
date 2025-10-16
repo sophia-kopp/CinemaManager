@@ -5,8 +5,10 @@ import org.example.backend.model.CinemaHallDto;
 import org.example.backend.repo.HallRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -57,5 +59,25 @@ class HallServiceTest {
         verify(mockRepo).save(hall);
         verify(mockIdService).generateUUid();
         assertEquals(hall, actual);
+    }
+    @Test
+    void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted () {
+        //GIVEN
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
+
+        //WHEN
+        //when(mockRepo.save(hall)).thenReturn(hall);
+        when(mockRepo.findById("1")).thenReturn(Optional.of(hall));
+
+        ResponseEntity<String> actual = hallService.deleteHall("1");
+
+        //THEN
+        //verify(mockRepo).save(hall);
+        verify(mockRepo).findById("1");
+        verify(mockRepo).deleteById("1");
+        assertEquals("Successfully deleted.", actual.getBody());
+        assertTrue(actual.getStatusCode().is2xxSuccessful());
+
     }
 }

@@ -1,8 +1,11 @@
 package org.example.backend.service;
 
+import org.example.backend.exceptions.HallNotFoundException;
 import org.example.backend.model.CinemaHall;
 import org.example.backend.model.CinemaHallDto;
 import org.example.backend.repo.HallRepo;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +35,10 @@ public class HallService {
         return repo.save(newHall);
     }
 
-    public void deleteHall(String id) {
-        repo.deleteById(id);
+    public ResponseEntity<String> deleteHall(String id) {
+        CinemaHall existingHall = repo.findById(id)
+                .orElseThrow(()-> new HallNotFoundException("Hall not found with id" + id));
+        repo.deleteById(existingHall.id());
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted.");
     }
 }
