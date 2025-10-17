@@ -3,7 +3,7 @@ import './App.css'
 import {Route, Routes} from "react-router-dom";
 import AllHalls from "./CinemaHalls/AllHalls.tsx";
 import NewHallForm from "./CinemaHalls/NewHallForm.tsx";
-import Header from "./MainPage/Header.tsx";
+import Header from "./MainPage/Header/Header.tsx";
 import Footer from "./MainPage/Footer/Footer.tsx";
 import Home from "./MainPage/Home.tsx";
 

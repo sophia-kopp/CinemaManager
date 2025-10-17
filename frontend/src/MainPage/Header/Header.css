@@ -1,9 +1,9 @@
-.footer{
+.header{
     width: 100%;
     position: absolute;
-    height: 80px;
+    height: 200px;
     overflow: hidden;
     align-items: baseline;
     align-self: center;
-    bottom: 0;
+    top: 0;
 }
