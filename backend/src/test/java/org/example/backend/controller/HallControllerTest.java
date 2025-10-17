@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -29,7 +28,7 @@ class HallControllerTest {
         hallRepo.deleteAll();
     }
 
-    @DirtiesContext
+
     @Test
     void getAllHalls_ShouldReturnListOfOneHall_WhenGetIsCalled() throws Exception {
         //given
@@ -51,6 +50,25 @@ class HallControllerTest {
                 ));
     }
 
+    @Test
+    void getHallByID_ShouldReturnOneHallWithId1_WhenGetId1IsCalled() throws Exception {
+        //given
+        CinemaHall hall = new CinemaHall("1", "test", 4, 4);
+        hallRepo.save(hall);
+        //when
+        mockMvc.perform(get("/api/halls/1"))
+                //then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """     
+                                {
+                                "id": "1",
+                                "name": "test",
+                                "rows": 4,
+                                "seatsPerRow":  4}
+                                """
+                ));
+    }
 
     @Test
     void addNewHall_ShouldReturnHall_WhenNewHallIsAdded() throws Exception {
