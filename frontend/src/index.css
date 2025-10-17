@@ -12,8 +12,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-
+.header {
+    background-color: rgba(10, 10, 71, 0.35);
+    h1 {
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        height: 130px;
+        align-items: end;
+    }
+}
+.footer {
+    background-color: rgba(10, 10, 71, 0.35);
+}
 
 a {
     font-weight: 500;
@@ -72,4 +83,32 @@ button:focus-visible {
     button {
         background-color: #f9f9f9;
     }
+}
+.nav-button {
+    background: rgba(31, 27, 57, 0.9);
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+
+    word-break: break-word;
+    border: 0;
+    transition: transform 0.3s ease;
+
+}
+
+.nav-button:hover {
+
+    background: rgba(64, 57, 120, 0.98);
+    box-shadow: #1514e4 0 10px 20px -10px;
+    transform: scale(1.02);
+    color: #FFFFFF;
 }

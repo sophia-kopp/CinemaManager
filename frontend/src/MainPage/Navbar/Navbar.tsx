@@ -4,8 +4,8 @@ import './Navbar.css';
 export default function Navbar(){
     return (
         <div className={"navbar"}>
-            <Link to={"/"}>Home</Link>
-            <Link to={"/allHalls"}>Halls</Link>
+            <Link to={"/"} className={"nav-button"}>Home</Link>
+            <Link to={"/allHalls"} className={"nav-button"}>Halls</Link>
         </div>
     )
 }
