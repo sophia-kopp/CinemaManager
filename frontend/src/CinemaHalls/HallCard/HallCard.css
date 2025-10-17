@@ -1,6 +1,8 @@
 .hall-card {
     background-color: #535bf2;
     border-radius: 5px;
+    width: 700px;
+    margin: 10px;
 }
 
 .rows {

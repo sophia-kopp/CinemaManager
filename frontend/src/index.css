@@ -25,6 +25,9 @@
 .footer {
     background-color: rgba(10, 10, 71, 0.35);
 }
+.main{
+    background-color: midnightblue;
+}
 
 a {
     font-weight: 500;

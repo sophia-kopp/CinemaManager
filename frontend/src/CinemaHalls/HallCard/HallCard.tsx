@@ -24,7 +24,6 @@ export default function HallCard(props: Readonly<HallCardProps>) {
 
     return (
         <div className={"hall-card"}>
-            <h3>Id: {props.hall.id}</h3>
             <h3>{props.hall.name}</h3>
             <div className={"rows"}>
                 <div className={"screen"}>
