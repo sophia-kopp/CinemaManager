@@ -1,0 +1,9 @@
+.header{
+    width: 100%;
+    position: absolute;
+    height: 200px;
+    overflow: hidden;
+    align-items: baseline;
+    align-self: center;
+    top: 0;
+}
