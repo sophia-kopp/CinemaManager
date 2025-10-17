@@ -63,6 +63,24 @@ class HallServiceTest {
     }
 
     @Test
+    void editExistingHall_ShouldReturnUpdatedHall_WhenEdited() {
+        //GIVEN
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
+        CinemaHallDto hallDto = new CinemaHallDto("test1", 4, 4);
+
+        //WHEN
+        //when(mockRepo.save(hall)).thenReturn(hall);
+        when(mockRepo.findById("1")).thenReturn(Optional.of(hall));
+        CinemaHall actual = hallService.editExistingHall("1", hallDto);
+
+        //THEN
+        //verify(mockRepo).save(hall);
+        verify(mockRepo).findById("1");
+        verify(mockRepo).save(hall);
+        assertEquals(hall,actual);
+    }
+
+    @Test
     void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted() {
         //GIVEN
         CinemaHall hall = new CinemaHall("1", "test1", 4, 4);

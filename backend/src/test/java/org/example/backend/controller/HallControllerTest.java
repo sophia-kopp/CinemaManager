@@ -76,6 +76,31 @@ class HallControllerTest {
                 ));
     }
     @Test
+    void editExistingHall_ShouldReturnUpdatedHall_WhenEdited() throws Exception {
+        CinemaHall hall = new CinemaHall("1", "test", 4, 4);
+        hallRepo.save(hall);
+        mockMvc.perform(put("/api/halls/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "name": "testUpdated",
+                                        "rows": 8,
+                                        "seatsPerRow":  8}
+                                        """
+                        ))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                {
+                                    "id": "1",
+                                    "name": "testUpdated",
+                                    "rows": 8,
+                                    "seatsPerRow":  8}
+                                """
+                ));
+    }
+    @Test
     void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted() throws Exception {
         CinemaHall hall = new CinemaHall("1", "test", 4, 4);
         hallRepo.save(hall);

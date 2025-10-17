@@ -47,12 +47,9 @@ public class HallService {
     }
 
     public CinemaHall editExistingHall(String id, CinemaHallDto updatedHall) {
-        CinemaHall existingHall= repo.findById(id).orElseThrow(()-> new HallNotFoundException("Hall not found with id: " + id));
+        repo.findById(id).orElseThrow(()-> new HallNotFoundException("Hall not found with id: " + id));
 
-        CinemaHall newHall = new CinemaHall(existingHall.id(),
-                updatedHall.name(),
-                updatedHall.rows(),
-                updatedHall.seatsPerRow());
+        CinemaHall newHall = new CinemaHall(id, updatedHall.name(), updatedHall.rows(), updatedHall.seatsPerRow());
         repo.save(newHall);
         return newHall;
     }
