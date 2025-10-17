@@ -63,6 +63,40 @@ class HallServiceTest {
     }
 
     @Test
+    void editExistingHall_ShouldReturnUpdatedHall_WhenEdited() {
+        //GIVEN
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
+        CinemaHallDto hallDto = new CinemaHallDto("test1", 4, 4);
+
+        //WHEN
+        //when(mockRepo.save(hall)).thenReturn(hall);
+        when(mockRepo.findById("1")).thenReturn(Optional.of(hall));
+        CinemaHall actual = hallService.editExistingHall("1", hallDto);
+
+        //THEN
+        //verify(mockRepo).save(hall);
+        verify(mockRepo).findById("1");
+        verify(mockRepo).save(hall);
+        assertEquals(hall,actual);
+    }
+    @Test
+    void editExistingHall_ShouldThrowException_WhenNoHallExistsWithThisId() {
+        //GIVEN
+        CinemaHallDto hallDto = new CinemaHallDto("test1", 4, 4);
+
+        //WHEN
+        when(mockRepo.findById("1")).thenReturn(Optional.empty());
+
+        //THEN
+        HallNotFoundException exception = assertThrows(HallNotFoundException.class, () ->
+                hallService.editExistingHall("1", hallDto));
+        assertEquals("Hall not found with id: 1", exception.getMessage());
+
+        verify(mockRepo).findById("1");
+        verifyNoMoreInteractions(mockRepo);
+    }
+
+    @Test
     void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted() {
         //GIVEN
         CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
@@ -73,7 +107,6 @@ class HallServiceTest {
         ResponseEntity<String> actual = hallService.deleteHall("1");
 
         //THEN
-        //verify(mockRepo).save(hall);
         verify(mockRepo).findById("1");
         verify(mockRepo).deleteById("1");
         assertEquals("Successfully deleted.", actual.getBody());

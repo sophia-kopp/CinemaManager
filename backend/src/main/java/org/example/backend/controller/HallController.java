@@ -22,9 +22,19 @@ public class HallController {
         return service.getAllHalls();
     }
 
+    @GetMapping("/{id}")
+    public CinemaHall getHallById(@PathVariable String id){
+        return service.getHallById(id);
+    }
+
     @PostMapping
     public CinemaHall addNewHall(@RequestBody CinemaHallDto hallDto){
         return service.addNewHall(hallDto);
+    }
+
+    @PutMapping("/{id}")
+    public CinemaHall editExistingHall(@PathVariable String id, @RequestBody CinemaHallDto hallDto){
+        return service.editExistingHall(id, hallDto);
     }
 
     @DeleteMapping("/{id}")

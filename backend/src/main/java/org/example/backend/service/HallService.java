@@ -41,4 +41,16 @@ public class HallService {
         repo.deleteById(existingHall.id());
         return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted.");
     }
+
+    public CinemaHall getHallById(String id) {
+        return repo.findById(id).orElseThrow(()-> new HallNotFoundException("Hall not found with id: " + id));
+    }
+
+    public CinemaHall editExistingHall(String id, CinemaHallDto updatedHall) {
+        CinemaHall hall = repo.findById(id).orElseThrow(()-> new HallNotFoundException("Hall not found with id: " + id));
+
+        CinemaHall newHall = new CinemaHall(id, updatedHall.name(), updatedHall.rows(), updatedHall.seatsPerRow());
+        repo.save(newHall);
+        return newHall;
+    }
 }

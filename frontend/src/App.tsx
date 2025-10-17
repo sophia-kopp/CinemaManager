@@ -17,6 +17,7 @@ function App() {
                 <Route path={"/"} element={<Home/>}/>
                 <Route path={"/allHalls"} element={<AllHalls/>}/>
                 <Route path={"/newHall"} element={<NewHallForm/>}/>
+                <Route path={"/editHall/:id"} element={<NewHallForm/>}/>
             </Routes>
             </div>
             <Footer/>
