@@ -1,13 +1,11 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.movie.Movie;
-import org.example.backend.model.movie.ResponseMovie;
 import org.example.backend.service.MovieService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
