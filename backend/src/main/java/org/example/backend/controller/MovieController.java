@@ -21,7 +21,7 @@ public class MovieController {
     }
 
     @GetMapping
-    public List<Movie> getAllMovies() throws IOException, InterruptedException {
+    public List<Movie> getAllMovies() {
         return service.getAllMovies();
     }
 }

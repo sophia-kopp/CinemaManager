@@ -20,7 +20,7 @@ public class MovieService {
 
     public MovieService(RestClient.Builder restClientBuilder) {
         this.restClient = restClientBuilder
-                .baseUrl("https://api.themoviedb.org/3/discover")
+                .baseUrl("https://api.themoviedb.org/3")
                 .requestInitializer(request -> {
                     // Set dynamic headers here
                     String token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYjVlMjhhMDdhYTgzMDQ3NWRiZjcwZmUzZTYxNDk1OSIsIm5iZiI6MTc2MDY5MzkyNy45MzcsInN1YiI6IjY4ZjIwZWE3ZGIwMjUyZTBjMTVhNTJkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TWNZzKGcTu2uSkMfJe4OE3ZwnaNYi3CyZ2fLf-kV6sE"; // Logic to fetch dynamic token
@@ -30,14 +30,12 @@ public class MovieService {
                 .build();
     }
 
-    public List<Movie> getAllMovies(){
+    public List<Movie> getAllMovies() {
         List<Movie> movies = restClient.get()
-                .uri("/movie")
+                .uri("/movie/top_rated?language=en-US&page=1")
                 .retrieve()
                 .body(ResponseMovie.class).results();
 
         return movies;
     }
-
-
 }
