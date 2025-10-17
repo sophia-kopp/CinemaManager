@@ -1,0 +1,13 @@
+.all-halls{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+button{
+    margin: 5px;
+}
+.new-hall {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+}
