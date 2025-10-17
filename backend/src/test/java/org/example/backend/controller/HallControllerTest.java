@@ -101,6 +101,23 @@ class HallControllerTest {
                 ));
     }
     @Test
+    void editExistingHall_ShouldThrowException_WhenNoHallWithThisId() throws Exception {
+        CinemaHall hall = new CinemaHall("1", "test", 4, 4);
+        hallRepo.save(hall);
+        mockMvc.perform(put("/api/halls/2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "name": "testUpdated",
+                                        "rows": 8,
+                                        "seatsPerRow":  8}
+                                        """
+                        ))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
     void deleteHall_ShouldReturnStatus_WhenSuccessfullyDeleted() throws Exception {
         CinemaHall hall = new CinemaHall("1", "test", 4, 4);
         hallRepo.save(hall);
