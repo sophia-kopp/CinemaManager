@@ -1,6 +1,7 @@
 import {useState} from "react";
 import type {Movie} from "../model/Movie.ts";
 import axios from "axios";
+import MovieCard from "./MovieCard/MovieCard.tsx";
 
 export default function AllMovies(){
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -16,7 +17,8 @@ export default function AllMovies(){
             <h3>All Movies</h3>
             <button onClick={loadAllMovies}>Go Get Them!</button>
             {movies.map(m=>
-                <h4>{m.title}</h4>)}
+                <MovieCard movie={m}/>
+            )}
         </>
     )
 }
