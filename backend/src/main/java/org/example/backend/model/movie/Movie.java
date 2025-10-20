@@ -1,8 +1,10 @@
 package org.example.backend.model.movie;
 
+import java.util.List;
+
 public record Movie(boolean adult,
                     String backdrop_path,
-                    int[] genre_ids,
+                    List<Integer> genre_ids,
                     int id,
                     String original_language,
                     String original_title,
@@ -12,6 +14,6 @@ public record Movie(boolean adult,
                     String release_date,
                     String title,
                     boolean video,
-                    float vote_average,
+                    double vote_average,
                     int vote_count) {
 }

@@ -26,11 +26,9 @@ public class MovieService {
     }
 
     public List<Movie> getAllMovies() {
-        List<Movie> movies = restClient.get()
+        return restClient.get()
                 .uri("/movie/top_rated?language=en-US&page=1")
                 .retrieve()
                 .body(ResponseMovie.class).results();
-
-        return movies;
     }
 }
