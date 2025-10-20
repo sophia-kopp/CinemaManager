@@ -6,9 +6,6 @@ import MoviePagination from "./MoviePagination/MoviePagination.tsx";
 export default function AllMovies(){
     const [movies, setMovies] = useState<Movie[]>([]);
 
-    useEffect(() => {
-        setMovies(movies)
-    }, [movies]);
     return (
         <>
             <h3>All Movies</h3>
