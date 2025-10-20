@@ -25,9 +25,9 @@ public class MovieService {
                 .build();
     }
 
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMoviesByPage(String page) {
         return restClient.get()
-                .uri("/movie/top_rated?language=en-US&page=1")
+                .uri("/movie/top_rated?language=en-US&page=" + page )
                 .retrieve()
                 .body(ResponseMovie.class).results();
     }
