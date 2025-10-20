@@ -60,7 +60,7 @@ class MovieControllerTest {
                         """, MediaType.APPLICATION_JSON
                 ));
         //When/then
-        mockMvc.perform(get("/api/movies"))
+        mockMvc.perform(get("/api/movies/1"))
                 //then
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(
