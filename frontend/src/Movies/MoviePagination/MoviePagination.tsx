@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import type {Movie} from "../../model/Movie.ts";
 import axios from "axios";
+import './MoviePagination.css'
 
 type MoviePaginationProps = {
     setMovies: (movies: Movie[]) => void;
@@ -9,10 +10,6 @@ type MoviePaginationProps = {
 export default function MoviePagination(props: Readonly<MoviePaginationProps>) {
     const [moviesLoaded, setMoviesLoaded] = useState<boolean>(false);
     const [pageIndex, setPageIndex] = useState<number>(1);
-
-    function loadAllMovies() {
-      loadPage()
-    }
 
     function getAnteriorPage() {
         if (pageIndex <= 1) {
@@ -47,9 +44,8 @@ export default function MoviePagination(props: Readonly<MoviePaginationProps>) {
 
     return (
         <div className={"pagination-buttons"}>
-            {!moviesLoaded && <button onClick={loadAllMovies}>Go Get Them!</button>}
             {moviesLoaded && <button onClick={getAnteriorPage}>Anterior Page</button>}
-            {moviesLoaded && <p>{pageIndex}</p>}
+            {moviesLoaded && <h4>Page: {pageIndex}</h4>}
             {moviesLoaded && <button onClick={getNextPage}>Next Page</button>}
 
 

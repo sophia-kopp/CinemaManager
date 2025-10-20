@@ -16,6 +16,7 @@ export default function AllMovies(){
             {movies.map(m=>
                 <MovieCard movie={m}/>
             )}
+            <MoviePagination setMovies={setMovies}/>
         </>
     )
 }
