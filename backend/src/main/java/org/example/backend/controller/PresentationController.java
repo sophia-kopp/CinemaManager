@@ -2,9 +2,7 @@ package org.example.backend.controller;
 
 import org.example.backend.model.Presentation;
 import org.example.backend.service.PresentationService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +20,10 @@ public class PresentationController {
     public List<Presentation> getAllPresentations(){
         return service.getAllPresentations();
     }
+
+    @PostMapping
+    public Presentation addNewPresentation(@RequestBody Presentation presentation){
+        return service.addNewPresentation(presentation);
+    }
+
 }

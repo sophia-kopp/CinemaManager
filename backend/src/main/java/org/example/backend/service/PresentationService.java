@@ -18,4 +18,8 @@ public class PresentationService {
     public List<Presentation> getAllPresentations(){
         return repo.findAll();
     }
+
+    public Presentation addNewPresentation(Presentation presentation) {
+        return repo.save(presentation);
+    }
 }
