@@ -7,6 +7,7 @@ import Header from "./MainPage/Header/Header.tsx";
 import Footer from "./MainPage/Footer/Footer.tsx";
 import Home from "./MainPage/Home.tsx";
 import AllMovies from "./Movies/AllMovies.tsx";
+import AllPresentations from "./Schedule/AllPresentations.tsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path={"/newHall"} element={<NewHallForm/>}/>
                 <Route path={"/editHall/:id"} element={<NewHallForm/>}/>
                 <Route path={"/allMovies"} element={<AllMovies/>}/>
+                <Route path={"/allPresentations"} element={<AllPresentations/>}/>
             </Routes>
             </div>
             <Footer/>
