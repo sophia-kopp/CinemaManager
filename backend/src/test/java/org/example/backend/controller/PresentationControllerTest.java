@@ -1,8 +1,6 @@
 package org.example.backend.controller;
 
-import org.example.backend.model.CinemaHall;
 import org.example.backend.model.Presentation;
-import org.example.backend.repo.HallRepo;
 import org.example.backend.repo.PresentationRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +13,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
