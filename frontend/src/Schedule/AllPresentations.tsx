@@ -27,7 +27,7 @@ export default function AllPresentations(){
             <h3>All Presentations</h3>
             <button onClick={addNewPresentation}>Add New Presentation</button>
             {presentations.map(p=>
-                <p>{p.movie}</p>
+                <p>Movie Id: {p.movieId}</p>
             )}
         </>
     )
