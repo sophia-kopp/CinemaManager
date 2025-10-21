@@ -1,12 +1,10 @@
 package org.example.backend.model;
 
-import org.example.backend.model.movie.Movie;
-
 import java.time.LocalDateTime;
 
 public record Presentation(String id,
-                           Movie movie,
+                           String movieId,
                            LocalDateTime startsAt,
-                           LocalDateTime endAt,
-                           CinemaHall cinemaHall) {
+                           LocalDateTime endsAt,
+                           String cinemaHallId) {
 }
