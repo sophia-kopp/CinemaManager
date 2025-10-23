@@ -8,10 +8,11 @@ type MovieCardProps={
 export default function MovieCard(props: Readonly<MovieCardProps>){
 
    function onAddToFavourite(){
-       axios.post("api/favouriteMovies")
+       axios.post("api/favouriteMovies", {id: String(props.movie.id), name: props.movie.title} )
            .then(r=>console.log(r.data))
            .catch(e=>console.log(e));
    }
+
 
     return (
         <div className={"movie-card"}>
