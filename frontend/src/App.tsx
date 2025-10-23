@@ -9,6 +9,7 @@ import Home from "./MainPage/Home.tsx";
 import AllMovies from "./Movies/AllMovies.tsx";
 import AllPresentations from "./Schedule/AllPresentations.tsx";
 import PresentationForm from "./Schedule/PresentationForm.tsx";
+import AllFavMovies from "./Movies/AllFavMovies.tsx";
 
 function App() {
 
@@ -16,15 +17,16 @@ function App() {
         <>
             <Header/>
             <div className={"main"}>
-            <Routes>
-                <Route path={"/"} element={<Home/>}/>
-                <Route path={"/allHalls"} element={<AllHalls/>}/>
-                <Route path={"/newHall"} element={<NewHallForm/>}/>
-                <Route path={"/editHall/:id"} element={<NewHallForm/>}/>
-                <Route path={"/allMovies"} element={<AllMovies/>}/>
-                <Route path={"/allPresentations"} element={<AllPresentations/>}/>
-                <Route path={"/newPresentation"} element={<PresentationForm/>}/>
-            </Routes>
+                <Routes>
+                    <Route path={"/"} element={<Home/>}/>
+                    <Route path={"/allHalls"} element={<AllHalls/>}/>
+                    <Route path={"/newHall"} element={<NewHallForm/>}/>
+                    <Route path={"/editHall/:id"} element={<NewHallForm/>}/>
+                    <Route path={"/allMovies"} element={<AllMovies/>}/>
+                    <Route path={"/allFavMovies"} element={<AllFavMovies/>}/>
+                    <Route path={"/allPresentations"} element={<AllPresentations/>}/>
+                    <Route path={"/newPresentation"} element={<PresentationForm/>}/>
+                </Routes>
             </div>
             <Footer/>
         </>

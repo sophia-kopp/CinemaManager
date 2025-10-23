@@ -6,7 +6,8 @@ export default function Navbar(){
         <div className={"navbar"}>
             <Link to={"/"} className={"nav-button"}>Home</Link>
             <Link to={"/allPresentations"} className={"nav-button"}>Presentations</Link>
-            <Link to={"/allMovies"} className={"nav-button"}>Movies</Link>
+            <Link to={"/allMovies"} className={"nav-button"}>All Movies</Link>
+            <Link to={"/allFavMovies"} className={"nav-button"}>Favourite Movies</Link>
             <Link to={"/allHalls"} className={"nav-button"}>Halls</Link>
         </div>
     )
