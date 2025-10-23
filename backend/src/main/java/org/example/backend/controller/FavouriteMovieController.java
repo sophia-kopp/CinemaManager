@@ -2,10 +2,9 @@ package org.example.backend.controller;
 
 import org.example.backend.model.movie.FavouriteMovie;
 import org.example.backend.service.FavouriteMovieService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/favouriteMovies")
@@ -14,6 +13,11 @@ public class FavouriteMovieController {
 
     public FavouriteMovieController(FavouriteMovieService service) {
         this.service = service;
+    }
+
+    @GetMapping
+    public List<FavouriteMovie> getAllFavouriteMovie(){
+        return service.getAllFavouriteMovies();
     }
 
     @PostMapping

@@ -4,6 +4,8 @@ import org.example.backend.model.movie.FavouriteMovie;
 import org.example.backend.repo.FavouriteMovieRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FavouriteMovieService {
 
@@ -15,5 +17,9 @@ public class FavouriteMovieService {
 
     public FavouriteMovie addNewFavouriteMovie(FavouriteMovie favouriteMovie){
         return repo.save(favouriteMovie);
+    }
+
+    public List<FavouriteMovie> getAllFavouriteMovies() {
+        return repo.findAll();
     }
 }
