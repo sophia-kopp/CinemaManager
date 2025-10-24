@@ -1,7 +1,7 @@
 import {type FormEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
-import type {CinemaHallDto} from "../model/CinemaHallDto.ts";
+import type {CinemaHallDto} from "../model/CinemaHall.ts";
 
 export default function NewHallForm() {
 
