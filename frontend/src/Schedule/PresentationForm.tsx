@@ -14,8 +14,8 @@ export default function PresentationForm() {
     const [favMovies, setFavMovies] = useState<FavouriteMovie[]>([]);
     const [halls, setHalls] = useState<CinemaHall[]>([]);
 
-    const [selectedMovieId, setSelectedMovieId] = useState<string>("");
-    const [selectedHallId, setSelectedHallId] = useState<string>("");
+    const [selectedMovie, setSelectedMovie] = useState<string>("");
+    const [selectedHall, setSelectedHall] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [endDate, setEndDate] = useState<string>("");
 
@@ -34,7 +34,7 @@ export default function PresentationForm() {
     }
 
     function validateForm() {
-        if (endDate !== "" && startDate !== "" && selectedHallId !== "" && selectedMovieId !== "") {
+        if (endDate !== "" && startDate !== "" && selectedHall !== "" && selectedMovie !== "") {
             setValidForm(true);
         } else {
             setValidForm(false);
@@ -44,8 +44,8 @@ export default function PresentationForm() {
     function submitPresentation(e: FormEvent) {
         e.preventDefault()
         const presentation: PresentationDto = {
-            movieId: selectedMovieId,
-            cinemaHallId: selectedHallId,
+            movieName: selectedMovie,
+            cinemaHallName: selectedHall,
             startsAt: new Date(startDate),
             endsAt: new Date(endDate),
         }
@@ -62,23 +62,23 @@ export default function PresentationForm() {
 
     useEffect(() => {
         validateForm()
-    }, [selectedMovieId, selectedHallId, startDate, endDate]);
+    }, [selectedMovie, selectedHall, startDate, endDate]);
 
     return (
         <form onSubmit={submitPresentation} className={"presentation-form"}>
             <label>Movie:
-                <select value={selectedMovieId} onChange={e => setSelectedMovieId(e.target.value)}>
+                <select value={selectedMovie} onChange={e => setSelectedMovie(e.target.value)}>
                     <option value={""}>Select a movie...</option>
                     {favMovies.map(m =>
-                        <option value={m.id}>{m.name}</option>
+                        <option value={m.name}>{m.name}</option>
                     )}
                 </select>
             </label>
             <label>Hall:
-                <select onChange={e => setSelectedHallId(e.target.value)}>
+                <select onChange={e => setSelectedHall(e.target.value)}>
                     <option value={""}>Select a hall...</option>
                     {halls.map(h =>
-                        <option value={h.id}>{h.name}</option>
+                        <option value={h.name}>{h.name}</option>
                     )}
                 </select>
             </label>
