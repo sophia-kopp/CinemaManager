@@ -26,4 +26,9 @@ public class PresentationController {
         return service.addNewPresentation(presentation);
     }
 
+    @DeleteMapping("/{id}")
+    public void deletePresentation(@PathVariable String id){
+        service.deletePresentation(id);
+    }
+
 }
