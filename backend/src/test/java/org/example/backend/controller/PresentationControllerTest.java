@@ -87,7 +87,7 @@ class PresentationControllerTest {
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
                                 "endsAt": "2024-08-12T11:11:11",
-                                "cinemaHallName ": "1"}
+                                "cinemaHallName": "1"}
                                 """
                 ));
     }
