@@ -13,8 +13,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -88,6 +88,29 @@ class PresentationControllerTest {
                                 "startsAt": "2024-08-12T11:11:11",
                                 "endsAt": "2024-08-12T11:11:11",
                                 "cinemaHallName": "1"}
+                                """
+                ));
+    }
+
+    @Test
+    void deletePresentation_shouldReturnEmptyList_WhenOnlyPresentationIsDeleted() throws Exception {
+        //given
+        String time = "12.08.2024 11:11:11";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+        repo.save(pres1);
+
+        mockMvc.perform(delete("/api/presentations/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(get("/api/presentations"))
+                //then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """     
+                                [
+                             
+                                ]
                                 """
                 ));
     }

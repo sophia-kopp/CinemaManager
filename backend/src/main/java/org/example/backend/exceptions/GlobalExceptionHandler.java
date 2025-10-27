@@ -13,4 +13,10 @@ public class GlobalExceptionHandler {
     public String handleHallNotFoundException(HallNotFoundException e){
         return e.getMessage();
     }
+
+    @ExceptionHandler(PresentationNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handlePresentationNotFoundException(PresentationNotFoundException e){
+        return e.getMessage();
+    }
 }
