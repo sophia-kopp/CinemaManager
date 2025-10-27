@@ -13,4 +13,11 @@ public class GlobalExceptionHandler {
     public String handleHallNotFoundException(HallNotFoundException e){
         return e.getMessage();
     }
+
+
+    @ExceptionHandler(FavouriteMovieNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleFavMovieNotFoundException(FavouriteMovieNotFoundException e){
+        return e.getMessage();
+    }
 }
