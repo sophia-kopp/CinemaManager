@@ -49,10 +49,10 @@ class PresentationControllerTest {
                                 [
                                 {
                                 "id": "1",
-                                "movieId": "1",
+                                "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
                                 "endsAt": "2024-08-12T11:11:11",
-                                "cinemaHallId": "1"
+                                "cinemaHallName": "1"
                                 }
                                 ]
                                 """
@@ -72,10 +72,10 @@ class PresentationControllerTest {
                         """
                                 {
                                                                    "id": "1",
-                                                                "movieId": "1",
+                                                                "movieName": "1",
                                                                 "startsAt": "2024-08-12T11:11:11",
                                                                 "endsAt": "2024-08-12T11:11:11",
-                                                                "cinemaHallId": "1"}
+                                                                "cinemaHallName": "1"}
                                 """
                 ))
                 //then
@@ -84,10 +84,10 @@ class PresentationControllerTest {
                         """     
                                 {
                                    "id": "1",
-                                "movieId": "1",
+                                "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
                                 "endsAt": "2024-08-12T11:11:11",
-                                "cinemaHallId": "1"}
+                                "cinemaHallName ": "1"}
                                 """
                 ));
     }
