@@ -24,4 +24,8 @@ public class FavouriteMovieController {
     public FavouriteMovie addNewFavouriteMovie(@RequestBody FavouriteMovie favouriteMovie){
         return service.addNewFavouriteMovie(favouriteMovie);
     }
+    @DeleteMapping("/{id}")
+    public void deleteFavMovie(@PathVariable String id){
+        service.deleteFavMovie(id);
+    }
 }
