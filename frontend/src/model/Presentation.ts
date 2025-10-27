@@ -1,7 +1,13 @@
 export type Presentation = {
     id: string,
-    movieId: string,
+    movieName: string,
     startsAt: Date,
     endsAt: Date,
-    cinemaHallId: string
+    cinemaHallName: string
+}
+export type PresentationDto = {
+    movieName: string,
+    cinemaHallName: string
+    startsAt: Date,
+    endsAt: Date,
 }
