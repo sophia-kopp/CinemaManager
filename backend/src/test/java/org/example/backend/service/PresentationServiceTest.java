@@ -1,5 +1,7 @@
 package org.example.backend.service;
 
+import org.example.backend.exceptions.HallNotFoundException;
+import org.example.backend.exceptions.PresentationNotFoundException;
 import org.example.backend.model.Presentation;
 import org.example.backend.repo.PresentationRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,5 +62,23 @@ class PresentationServiceTest {
         //THEN
         verify(mockRepo).save(pres1);
         assertEquals(pres1, actual);
+    }
+
+    @Test
+    void deletePresentation(){
+        String time = "12.08.2024 11:11:11";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+
+        //WHEN
+
+        doNothing().when(mockRepo).deleteById("1");
+        when(mockRepo.existsById("1")).thenReturn(false);
+
+        PresentationNotFoundException exception = assertThrows(PresentationNotFoundException.class, () ->
+                service.deletePresentation("1"));
+
+        assertEquals("Presentation not found with id: 1", exception.getMessage());
     }
 }
