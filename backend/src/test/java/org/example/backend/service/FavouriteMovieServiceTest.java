@@ -1,5 +1,6 @@
 package org.example.backend.service;
 
+import org.example.backend.exceptions.FavouriteMovieNotFoundException;
 import org.example.backend.model.movie.FavouriteMovie;
 import org.example.backend.repo.FavouriteMovieRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,5 +51,16 @@ class FavouriteMovieServiceTest {
         //THEN
         verify(mockRepo).save(favMovie);
         assertEquals(favMovie, actual);
+    }
+    @Test
+    void deleteFavMovie_ShouldThrowException_WhenNoHallFound() {
+        //THEN
+        doNothing().when(mockRepo).deleteById("1");
+        when(mockRepo.existsById("1")).thenReturn(false);
+
+        FavouriteMovieNotFoundException exception = assertThrows(FavouriteMovieNotFoundException.class, () ->
+                service.deleteFavMovie("1"));
+
+        assertEquals("Favourite Movie not found with id: 1", exception.getMessage());
     }
 }

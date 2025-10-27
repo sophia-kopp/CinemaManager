@@ -11,8 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -71,4 +70,21 @@ class FavouriteMovieControllerTest {
                                 """
                 ));
     }
+
+    @Test
+    void deleteFavMovie_ShouldReturnStatus_WhenSuccessfullyDeleted() throws Exception {
+        FavouriteMovie movie = new FavouriteMovie("1", "test");
+        repo.save(movie);
+        mockMvc.perform(delete("/api/favouriteMovies/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(get("/api/favouriteMovies"))
+                //then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """
+                                []
+                                """
+                ));
+    }
+
 }

@@ -10,13 +10,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HallNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleHallNotFoundException(HallNotFoundException e){
+    public String handleHallNotFoundException(HallNotFoundException e) {
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(FavouriteMovieNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleFavMovieNotFoundException(FavouriteMovieNotFoundException e) {
         return e.getMessage();
     }
 
     @ExceptionHandler(PresentationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handlePresentationNotFoundException(PresentationNotFoundException e){
+    public String handlePresentationNotFoundException(PresentationNotFoundException e) {
         return e.getMessage();
     }
 }
