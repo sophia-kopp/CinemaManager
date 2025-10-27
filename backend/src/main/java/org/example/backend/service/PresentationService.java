@@ -1,7 +1,10 @@
 package org.example.backend.service;
 
+import org.example.backend.exceptions.PresentationNotFoundException;
 import org.example.backend.model.Presentation;
 import org.example.backend.repo.PresentationRepo;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +26,10 @@ public class PresentationService {
         return repo.save(presentation);
     }
 
-    public void deletePresentation(String id) {
-        repo.deleteById(id);
+    public ResponseEntity<String> deletePresentation(String id) {
+        Presentation existingPres = repo.findById(id)
+                .orElseThrow(()-> new PresentationNotFoundException("Presentation not found with id: " + id));
+        repo.deleteById(existingPres.id());
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted.");
     }
 }
