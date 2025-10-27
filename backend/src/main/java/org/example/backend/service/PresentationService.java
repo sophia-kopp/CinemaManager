@@ -22,4 +22,8 @@ public class PresentationService {
     public Presentation addNewPresentation(Presentation presentation) {
         return repo.save(presentation);
     }
+
+    public void deletePresentation(String id) {
+        repo.deleteById(id);
+    }
 }
