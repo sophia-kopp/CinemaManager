@@ -44,7 +44,7 @@ public class PresentationService {
         Presentation updatedPresentation = new Presentation(existingPres.id(),
                 presentation.movieName(),
                 presentation.startsAt(),
-                presentation.endsAt(),
+                presentation.durationInMinutes(),
                 presentation.cinemaHallName());
         repo.save(updatedPresentation);
         return updatedPresentation;

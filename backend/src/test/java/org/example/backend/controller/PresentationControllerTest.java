@@ -38,7 +38,7 @@ class PresentationControllerTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
         repo.save(pres1);
         //when
         mockMvc.perform(get("/api/presentations"))
@@ -51,7 +51,7 @@ class PresentationControllerTest {
                                 "id": "1",
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
-                                "endsAt": "2024-08-12T11:11:11",
+                                "durationInMinutes": 90,
                                 "cinemaHallName": "1"
                                 }
                                 ]
@@ -65,7 +65,7 @@ class PresentationControllerTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
         repo.save(pres1);
         //when
         mockMvc.perform(post("/api/presentations").contentType(MediaType.APPLICATION_JSON).content(
@@ -74,7 +74,7 @@ class PresentationControllerTest {
                                                                    "id": "1",
                                                                 "movieName": "1",
                                                                 "startsAt": "2024-08-12T11:11:11",
-                                                                "endsAt": "2024-08-12T11:11:11",
+                                                                "durationInMinutes": 90,
                                                                 "cinemaHallName": "1"}
                                 """
                 ))
@@ -86,7 +86,7 @@ class PresentationControllerTest {
                                    "id": "1",
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
-                                "endsAt": "2024-08-12T11:11:11",
+                                "durationInMinutes": 90,
                                 "cinemaHallName": "1"}
                                 """
                 ));
@@ -98,7 +98,7 @@ class PresentationControllerTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "test", dateTime, dateTime, "test");
+        Presentation pres1 = new Presentation("1", "test", dateTime, 90, "test");
         repo.save(pres1);
         //when
         mockMvc.perform(put("/api/presentations/1").contentType(MediaType.APPLICATION_JSON).content(
@@ -107,7 +107,7 @@ class PresentationControllerTest {
                                                                    "id": "1",
                                                                 "movieName": "testUpdate",
                                                                 "startsAt": "2024-08-12T11:11:11",
-                                                                "endsAt": "2024-08-12T11:11:11",
+                                                                "durationInMinutes": 90,
                                                                 "cinemaHallName": "testUpdate"}
                                 """
                 ))
@@ -119,7 +119,7 @@ class PresentationControllerTest {
                                    "id": "1",
                                 "movieName": "testUpdate",
                                 "startsAt": "2024-08-12T11:11:11",
-                                "endsAt": "2024-08-12T11:11:11",
+                                "durationInMinutes": 90,
                                 "cinemaHallName": "testUpdate"}
                                 """
                 ));
@@ -131,7 +131,7 @@ class PresentationControllerTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
         repo.save(pres1);
 
         mockMvc.perform(delete("/api/presentations/1"))
