@@ -18,7 +18,7 @@ export default function PresentationForm() {
     const [selectedMovie, setSelectedMovie] = useState<string>("");
     const [selectedHall, setSelectedHall] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
-    const [endDate, setEndDate] = useState<string>("");
+    const [duration, setDuration] = useState<number>(0);
 
     const [validForm, setValidForm] = useState<boolean>(false);
 
@@ -40,7 +40,7 @@ export default function PresentationForm() {
                     setSelectedHall(r.data.cinemaHallName)
                     setSelectedMovie(r.data.movieName)
                     setStartDate(r.data.startsAt)
-                    setEndDate(r.data.endsAt)
+                    setDuration(r.data.duration)
                     setValidForm(true);
                 }
             )
@@ -49,9 +49,10 @@ export default function PresentationForm() {
     }
 
     function validateForm() {
-        if (endDate !== "" && startDate !== "" && selectedHall !== "" && selectedMovie !== "") {
+        if (duration !== 0 && startDate !== "" && selectedHall !== "" && selectedMovie !== "") {
             setValidForm(true);
         } else {
+            setValidForm(false);
             setValidForm(false);
         }
     }
@@ -62,12 +63,15 @@ export default function PresentationForm() {
             movieName: selectedMovie,
             cinemaHallName: selectedHall,
             startsAt: new Date(startDate),
-            endsAt: new Date(endDate),
+            duration: duration,
         }
+
         if (param.id === undefined) {
-            console.log("e: ", e)
             axios.post("/api/presentations", presentation)
-                .then(() => nav("/allPresentations"))
+                .then((r) => {
+                    nav("/allPresentations")
+                    console.log(r.data)
+                })
                 .catch(e => console.log(e));
         } else {
             axios.put("/api/presentations/" + param.id, presentation)
@@ -87,7 +91,7 @@ export default function PresentationForm() {
 
     useEffect(() => {
         validateForm()
-    }, [selectedMovie, selectedHall, startDate, endDate]);
+    }, [selectedMovie, selectedHall, startDate, duration]);
 
     return (
         <form onSubmit={submitPresentation} className={"presentation-form"}>
@@ -111,10 +115,11 @@ export default function PresentationForm() {
                 <input value={startDate} aria-label="Date and time" type="datetime-local"
                        onChange={e => setStartDate(e.target.value)}/>
             </label>
-            <label>Ends at:
-                <input value={endDate} aria-label="Date and time" type="datetime-local"
-                       onChange={e => setEndDate(e.target.value)}/>
+            <label>Duration in minutes:
+                <input value={duration} type="number"
+                       onChange={e => setDuration(Number(e.target.value))}/>
             </label>
+            <p>Ends at: </p>
             <button disabled={!validForm} type={"submit"}>Save Presentation</button>
         </form>
     )

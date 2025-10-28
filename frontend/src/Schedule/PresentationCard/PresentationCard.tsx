@@ -25,7 +25,7 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
         <div>
             <p>Movie: {props.presentation.movieName}</p>
             <p>Starts at: {props.presentation.startsAt}</p>
-            <p>Ends at: {props.presentation.endsAt}</p>
+            <p>Duration: {props.presentation.duration}</p>
             <button onClick={deletePresentation}>Delete</button>
             <button onClick={editPresentation}>Edit</button>
         </div>

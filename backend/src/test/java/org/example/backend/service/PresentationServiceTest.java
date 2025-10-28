@@ -33,8 +33,8 @@ class PresentationServiceTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
-        Presentation pres2 = new Presentation("2", "2", dateTime, dateTime, "2");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
+        Presentation pres2 = new Presentation("2", "2", dateTime, 90, "2");
 
         List<Presentation> presentations = List.of(pres1, pres2);
 
@@ -53,7 +53,7 @@ class PresentationServiceTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
 
         //WHEN
         when(mockRepo.save(pres1)).thenReturn(pres1);
@@ -69,8 +69,8 @@ class PresentationServiceTest {
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
-        Presentation updatedPres = new Presentation("1", "updated", dateTime, dateTime, "updated");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
+        Presentation updatedPres = new Presentation("1", "updated", dateTime, 90, "updated");
 
         //WHEN
         when(mockRepo.findById("1")).thenReturn(Optional.of(pres1));
