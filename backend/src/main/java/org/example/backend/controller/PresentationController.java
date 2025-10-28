@@ -21,9 +21,18 @@ public class PresentationController {
         return service.getAllPresentations();
     }
 
+    @GetMapping("/{id}")
+    public Presentation getPresentationById(@PathVariable String id){
+        return service.getPresentationById(id);
+    }
+
     @PostMapping
     public Presentation addNewPresentation(@RequestBody Presentation presentation){
         return service.addNewPresentation(presentation);
+    }
+    @PutMapping("/{id}")
+    public Presentation updateExistingPresentation(@PathVariable String id, @RequestBody Presentation presentation){
+        return service.updateExistingPresentation(id, presentation);
     }
 
     @DeleteMapping("/{id}")
