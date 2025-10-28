@@ -16,14 +16,18 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
             .then(() => deletePresentation())
             .catch(e => console.log(e))
     }
+    function editPresentation(){
+        nav("/editPresentation/" + props.presentation.id);
+    }
 
 
     return (
         <div>
             <p>Movie: {props.presentation.movieName}</p>
-            <p>Movie: {props.presentation.startsAt}</p>
-            <p>Movie: {props.presentation.endsAt}</p>
+            <p>Starts at: {props.presentation.startsAt}</p>
+            <p>Ends at: {props.presentation.endsAt}</p>
             <button onClick={deletePresentation}>Delete</button>
+            <button onClick={editPresentation}>Edit</button>
         </div>
     )
 }

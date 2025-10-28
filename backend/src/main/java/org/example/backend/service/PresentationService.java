@@ -32,4 +32,21 @@ public class PresentationService {
         repo.deleteById(existingPres.id());
         return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted.");
     }
+
+    public Presentation getPresentationById(String id) {
+        return repo.findById(id).orElseThrow( ()->new PresentationNotFoundException("Presentation not found with id: " + id));
+    }
+
+    public Presentation updateExistingPresentation(String id, Presentation presentation) {
+        Presentation existingPres = repo.findById(id)
+                .orElseThrow(()-> new PresentationNotFoundException("Presentation not found with id: " + id));
+
+        Presentation updatedPresentation = new Presentation(existingPres.id(),
+                presentation.movieName(),
+                presentation.startsAt(),
+                presentation.endsAt(),
+                presentation.cinemaHallName());
+        repo.save(updatedPresentation);
+        return updatedPresentation;
+    }
 }

@@ -1,6 +1,5 @@
 package org.example.backend.service;
 
-import org.example.backend.exceptions.HallNotFoundException;
 import org.example.backend.exceptions.PresentationNotFoundException;
 import org.example.backend.model.Presentation;
 import org.example.backend.repo.PresentationRepo;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -48,7 +48,7 @@ class PresentationServiceTest {
     }
 
     @Test
-    void addNewPresentation_ShouldReturnHall_WhenHallIsAdded() {
+    void addNewPresentation_ShouldReturnPresentation_WhenPresentationIsAdded() {
         //GIVEN
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
@@ -63,14 +63,28 @@ class PresentationServiceTest {
         verify(mockRepo).save(pres1);
         assertEquals(pres1, actual);
     }
-
     @Test
-    void deletePresentation(){
+    void updateExistingPresentation_ShouldReturnUpdatedPresentation_WhenPresentationIsAdded() {
+        //GIVEN
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
         Presentation pres1 = new Presentation("1", "1", dateTime, dateTime, "1");
+        Presentation updatedPres = new Presentation("1", "updated", dateTime, dateTime, "updated");
 
+        //WHEN
+        when(mockRepo.findById("1")).thenReturn(Optional.of(pres1));
+        when(mockRepo.save(updatedPres)).thenReturn(updatedPres);
+        Presentation actual = service.updateExistingPresentation("1", updatedPres);
+
+        //THEN
+        verify(mockRepo).findById("1");
+        verify(mockRepo).save(updatedPres);
+        assertEquals(updatedPres, actual);
+    }
+
+    @Test
+    void deletePresentation_shouldThrowException_WhenNoPresentationFound(){
         //WHEN
 
         doNothing().when(mockRepo).deleteById("1");

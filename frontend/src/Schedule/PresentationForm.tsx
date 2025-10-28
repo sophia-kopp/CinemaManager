@@ -4,11 +4,12 @@ import axios from "axios";
 import './PresentationForm.css';
 import type {FavouriteMovie} from "../model/FavouriteMovie.ts";
 import type {PresentationDto} from "../model/Presentation.ts";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 export default function PresentationForm() {
 
+    const param = useParams()
     const nav = useNavigate();
 
     const [favMovies, setFavMovies] = useState<FavouriteMovie[]>([]);
@@ -22,7 +23,7 @@ export default function PresentationForm() {
     const [validForm, setValidForm] = useState<boolean>(false);
 
     function loadHalls() {
-        axios.get("api/halls")
+        axios.get("/api/halls")
             .then(r => setHalls(r.data))
             .catch(e => console.log(e));
     }
@@ -31,6 +32,20 @@ export default function PresentationForm() {
         axios.get("/api/favouriteMovies")
             .then(r => setFavMovies(r.data))
             .catch(e => console.log(e));
+    }
+
+    function loadExistingPresentation() {
+        axios.get("/api/presentations/" + param.id)
+            .then(r => {
+                    setSelectedHall(r.data.cinemaHallName)
+                    setSelectedMovie(r.data.movieName)
+                    setStartDate(r.data.startsAt)
+                    setEndDate(r.data.endsAt)
+                    setValidForm(true);
+                }
+            )
+            .catch(e => console.log(e));
+
     }
 
     function validateForm() {
@@ -49,16 +64,26 @@ export default function PresentationForm() {
             startsAt: new Date(startDate),
             endsAt: new Date(endDate),
         }
-        console.log("e: ", e)
-        axios.post("/api/presentations", presentation)
-            .then(() => nav("/allPresentations"))
-            .catch(e => console.log(e));
+        if (param.id === undefined) {
+            console.log("e: ", e)
+            axios.post("/api/presentations", presentation)
+                .then(() => nav("/allPresentations"))
+                .catch(e => console.log(e));
+        } else {
+            axios.put("/api/presentations/" + param.id, presentation)
+                .then(() => nav("/allPresentations"))
+                .catch(e => console.log(e));
+        }
     }
 
     useEffect(() => {
         loadHalls()
         loadMovies()
+        if (param.id !== undefined) {
+            loadExistingPresentation()
+        }
     }, []);
+
 
     useEffect(() => {
         validateForm()
@@ -75,7 +100,7 @@ export default function PresentationForm() {
                 </select>
             </label>
             <label>Hall:
-                <select onChange={e => setSelectedHall(e.target.value)}>
+                <select value={selectedHall} onChange={e => setSelectedHall(e.target.value)}>
                     <option value={""}>Select a hall...</option>
                     {halls.map(h =>
                         <option value={h.name}>{h.name}</option>
@@ -83,11 +108,11 @@ export default function PresentationForm() {
                 </select>
             </label>
             <label>Starts at:
-                <input aria-label="Date and time" type="datetime-local"
+                <input value={startDate} aria-label="Date and time" type="datetime-local"
                        onChange={e => setStartDate(e.target.value)}/>
             </label>
             <label>Ends at:
-                <input aria-label="Date and time" type="datetime-local"
+                <input value={endDate} aria-label="Date and time" type="datetime-local"
                        onChange={e => setEndDate(e.target.value)}/>
             </label>
             <button disabled={!validForm} type={"submit"}>Save Presentation</button>

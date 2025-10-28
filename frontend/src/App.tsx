@@ -26,6 +26,7 @@ function App() {
                     <Route path={"/allFavMovies"} element={<AllFavMovies/>}/>
                     <Route path={"/allPresentations"} element={<AllPresentations/>}/>
                     <Route path={"/newPresentation"} element={<PresentationForm/>}/>
+                    <Route path={"/editPresentation/:id"} element={<PresentationForm/>}/>
                 </Routes>
             </div>
             <Footer/>
