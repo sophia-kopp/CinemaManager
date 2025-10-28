@@ -93,6 +93,39 @@ class PresentationControllerTest {
     }
 
     @Test
+    void updateExistingPresentation_ShouldReturnPresentationWithOldIdAndNewData_WhenUpdated() throws Exception {
+        //given
+        String time = "12.08.2024 11:11:11";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+        Presentation pres1 = new Presentation("1", "test", dateTime, dateTime, "test");
+        repo.save(pres1);
+        //when
+        mockMvc.perform(put("/api/presentations/1").contentType(MediaType.APPLICATION_JSON).content(
+                        """
+                                {
+                                                                   "id": "1",
+                                                                "movieName": "testUpdate",
+                                                                "startsAt": "2024-08-12T11:11:11",
+                                                                "endsAt": "2024-08-12T11:11:11",
+                                                                "cinemaHallName": "testUpdate"}
+                                """
+                ))
+                //then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """     
+                                {
+                                   "id": "1",
+                                "movieName": "testUpdate",
+                                "startsAt": "2024-08-12T11:11:11",
+                                "endsAt": "2024-08-12T11:11:11",
+                                "cinemaHallName": "testUpdate"}
+                                """
+                ));
+    }
+
+    @Test
     void deletePresentation_shouldReturnEmptyList_WhenOnlyPresentationIsDeleted() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
@@ -109,7 +142,7 @@ class PresentationControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json(
                         """     
                                 [
-                             
+                                
                                 ]
                                 """
                 ));

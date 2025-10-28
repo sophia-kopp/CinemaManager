@@ -41,7 +41,11 @@ public class PresentationService {
         Presentation existingPres = repo.findById(id)
                 .orElseThrow(()-> new PresentationNotFoundException("Presentation not found with id: " + id));
 
-        Presentation updatedPresentation = new Presentation(id, existingPres.movieName(), existingPres.startsAt(), existingPres.endsAt(), existingPres.cinemaHallName());
+        Presentation updatedPresentation = new Presentation(existingPres.id(),
+                presentation.movieName(),
+                presentation.startsAt(),
+                presentation.endsAt(),
+                presentation.cinemaHallName());
         repo.save(updatedPresentation);
         return updatedPresentation;
     }
