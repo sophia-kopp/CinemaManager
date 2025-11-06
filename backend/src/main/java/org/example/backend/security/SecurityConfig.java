@@ -1,5 +1,6 @@
 package org.example.backend.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Value("${app.url}")
+    private String sucessUrl;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/presentations/").hasAuthority("ADMIN")
                         .anyRequest().permitAll()
                 )
-                .logout(l-> l.logoutSuccessUrl(System.getenv("APP_URL")))
+                .logout(l-> l.logoutSuccessUrl(sucessUrl))
                 .oauth2Login(o -> o
                         .defaultSuccessUrl("http://localhost:5173"));
         return http.build();
