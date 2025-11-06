@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/presentations/").hasAuthority("ADMIN")
                         .anyRequest().permitAll()
                 )
+                .logout(l-> l.logoutSuccessUrl(System.getenv("APP_URL")))
                 .oauth2Login(o -> o
                         .defaultSuccessUrl("http://localhost:5173"));
         return http.build();
