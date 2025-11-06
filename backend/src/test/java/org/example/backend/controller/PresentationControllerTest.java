@@ -62,7 +62,7 @@ class PresentationControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(authorities = "ADMIN")
     void addNewPresentation_ShouldReturnOnePresentation_WhenGetId1IsCalled() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
@@ -96,6 +96,7 @@ class PresentationControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void updateExistingPresentation_ShouldReturnPresentationWithOldIdAndNewData_WhenUpdated() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
@@ -129,7 +130,7 @@ class PresentationControllerTest {
     }
 
     @Test
-    @WithMockUser
+    @WithMockUser(authorities = "ADMIN")
     void deletePresentation_shouldReturnEmptyList_WhenOnlyPresentationIsDeleted() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
