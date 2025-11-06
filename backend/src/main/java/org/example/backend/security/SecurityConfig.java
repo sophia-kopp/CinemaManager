@@ -21,9 +21,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("/api/halls/").hasAuthority("ADMIN")
-                        .requestMatchers("/api/movies/").hasAuthority("ADMIN")
-                        .requestMatchers("/api/favouriteMovies/").hasAuthority("ADMIN")
+                        .requestMatchers("/api/halls").hasAuthority("ADMIN")
+                        .requestMatchers("/api/movies/*").hasAuthority("ADMIN")
+                        .requestMatchers("/api/favouriteMovies").hasAuthority("ADMIN")
                         //.requestMatchers("/api/reservations").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/presentations").authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/presentations").hasAuthority("ADMIN")
