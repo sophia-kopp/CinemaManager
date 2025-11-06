@@ -70,7 +70,7 @@ export default function PresentationForm() {
             axios.post("/api/presentations", presentation)
                 .then((r) => {
                     nav("/allPresentations")
-                    console.log("data submitted",r.data)
+                    console.log(r.data)
                 })
                 .catch(e => console.log(e));
         } else {
@@ -116,8 +116,8 @@ export default function PresentationForm() {
                        onChange={e => setStartDate(e.target.value)}/>
             </label>
             <label>Duration in minutes:
-                <input value={duration} type="text"
-                       onChange={e => setDuration(parseInt(e.target.value))}/>
+                <input value={duration} type="number"
+                       onChange={e => setDuration(Number(e.target.value))}/>
             </label>
             <p>Ends at: </p>
             <button disabled={!validForm} type={"submit"}>Save Presentation</button>

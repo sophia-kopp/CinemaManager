@@ -34,8 +34,8 @@ function calculateEndsAt(){
         <div>
             <p>Movie: {props.presentation.movieName}</p>
             <p>Day: {date}</p>
-            <p>Starts at: {props.presentation.startsAt.toString()}</p>
-            <p>Ends at: {props.presentation.startsAt.toString()}</p>
+            <p>Starts at: {props.presentation.startsAt}</p>
+            <p>Ends at: {props.presentation.startsAt}</p>
             <p>Duration: {props.presentation.duration}</p>
             <button onClick={deletePresentation}>Delete</button>
             <button onClick={editPresentation}>Edit</button>
