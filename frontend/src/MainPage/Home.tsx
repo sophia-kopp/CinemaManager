@@ -1,7 +1,13 @@
-export default function Home(){
+type HomeProps = {
+    user: string
+}
+
+export default function Home(props:Readonly<HomeProps>) {
+
+
     return (
         <>
-            <h2>Welcome</h2>
+            <h2>Welcome {props.user}!</h2>
         </>
     )
 }

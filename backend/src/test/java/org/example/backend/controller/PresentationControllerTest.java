@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -33,6 +35,7 @@ class PresentationControllerTest {
 
 
     @Test
+    @WithMockUser
     void getAllPresentations_ShouldReturnListOfOnePresentation_WhenGetIsCalled() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
@@ -60,6 +63,7 @@ class PresentationControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void addNewPresentation_ShouldReturnOnePresentation_WhenGetId1IsCalled() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
@@ -93,6 +97,7 @@ class PresentationControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void updateExistingPresentation_ShouldReturnPresentationWithOldIdAndNewData_WhenUpdated() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";
@@ -126,6 +131,7 @@ class PresentationControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void deletePresentation_shouldReturnEmptyList_WhenOnlyPresentationIsDeleted() throws Exception {
         //given
         String time = "12.08.2024 11:11:11";

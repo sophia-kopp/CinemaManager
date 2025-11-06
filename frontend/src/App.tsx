@@ -10,23 +10,31 @@ import AllMovies from "./Movies/AllMovies.tsx";
 import AllPresentations from "./Schedule/AllPresentations.tsx";
 import PresentationForm from "./Schedule/PresentationForm.tsx";
 import AllFavMovies from "./Movies/AllFavMovies.tsx";
+import ProtectedRoute from "./MainPage/ProtectedRoute.tsx";
+import {useState} from "react";
+import Login from "./MainPage/Login.tsx";
 
 function App() {
+
+    const [user, setUser] = useState<string | undefined | null>(undefined);
 
     return (
         <>
             <Header/>
             <div className={"main"}>
                 <Routes>
-                    <Route path={"/"} element={<Home/>}/>
-                    <Route path={"/allHalls"} element={<AllHalls/>}/>
-                    <Route path={"/newHall"} element={<NewHallForm/>}/>
-                    <Route path={"/editHall/:id"} element={<NewHallForm/>}/>
-                    <Route path={"/allMovies"} element={<AllMovies/>}/>
-                    <Route path={"/allFavMovies"} element={<AllFavMovies/>}/>
-                    <Route path={"/allPresentations"} element={<AllPresentations/>}/>
-                    <Route path={"/newPresentation"} element={<PresentationForm/>}/>
-                    <Route path={"/editPresentation/:id"} element={<PresentationForm/>}/>
+                    <Route path={"/login"} element={<Login setUser={setUser}/>}/>
+                    <Route element={<ProtectedRoute user={user}/>}>
+                        <Route path={"/"} element={<Home user={user ?? ""}/>}/>
+                        <Route path={"/allHalls"} element={<AllHalls/>}/>
+                        <Route path={"/newHall"} element={<NewHallForm/>}/>
+                        <Route path={"/editHall/:id"} element={<NewHallForm/>}/>
+                        <Route path={"/allMovies"} element={<AllMovies/>}/>
+                        <Route path={"/allFavMovies"} element={<AllFavMovies/>}/>
+                        <Route path={"/allPresentations"} element={<AllPresentations/>}/>
+                        <Route path={"/newPresentation"} element={<PresentationForm/>}/>
+                        <Route path={"/editPresentation/:id"} element={<PresentationForm/>}/>
+                    </Route>
                 </Routes>
             </div>
             <Footer/>
