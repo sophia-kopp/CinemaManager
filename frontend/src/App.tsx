@@ -13,6 +13,7 @@ import AllFavMovies from "./Movies/AllFavMovies.tsx";
 import ProtectedRoute from "./MainPage/ProtectedRoute.tsx";
 import {useState} from "react";
 import Login from "./MainPage/Login.tsx";
+import AllReservations from "./Reservation/AllReservations.tsx";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                         <Route path={"/allPresentations"} element={<AllPresentations/>}/>
                         <Route path={"/newPresentation"} element={<PresentationForm/>}/>
                         <Route path={"/editPresentation/:id"} element={<PresentationForm/>}/>
+                        <Route path={"/allReservations"} element={<AllReservations/>}/>
                     </Route>
                 </Routes>
             </div>

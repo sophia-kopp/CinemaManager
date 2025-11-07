@@ -19,6 +19,7 @@ export default function Navbar(){
             <Link to={"/allMovies"} className={"nav-button"}>All Movies</Link>
             <Link to={"/allFavMovies"} className={"nav-button"}>Favourite Movies</Link>
             <Link to={"/allHalls"} className={"nav-button"}>Halls</Link>
+            <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
             <button onClick={logout}>Logout</button>
         </div>
     )
