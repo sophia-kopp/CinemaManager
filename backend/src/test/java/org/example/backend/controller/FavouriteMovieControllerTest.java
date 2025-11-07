@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -29,6 +30,7 @@ class FavouriteMovieControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void getAllFavouriteMovie_ShouldReturnListOfFavMovies_WhenGetAllIsCalled() throws Exception {
 
         FavouriteMovie favMovie = new FavouriteMovie("1", "test1");
@@ -51,6 +53,7 @@ class FavouriteMovieControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void addNewFavouriteMovie_ShouldReturnFavMovie_WhenFavMovieIsAdded() throws Exception {
         mockMvc.perform(post("/api/favouriteMovies")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -72,6 +75,7 @@ class FavouriteMovieControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void deleteFavMovie_ShouldReturnStatus_WhenSuccessfullyDeleted() throws Exception {
         FavouriteMovie movie = new FavouriteMovie("1", "test");
         repo.save(movie);
