@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -28,6 +29,7 @@ class MovieControllerTest {
     private MockRestServiceServer mockServer;
 
     @Test
+    @WithMockUser(authorities = "ADMIN")
     void getAllMovies_ShouldReturnListOfMovies_whenCalled() throws Exception {
         //GIVEN
         mockServer.expect(requestTo("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"))
