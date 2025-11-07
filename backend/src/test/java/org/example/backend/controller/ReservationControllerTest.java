@@ -1,0 +1,139 @@
+package org.example.backend.controller;
+
+import org.example.backend.model.Presentation;
+import org.example.backend.model.Reservation;
+import org.example.backend.model.SeatPosition;
+import org.example.backend.repo.PresentationRepo;
+import org.example.backend.repo.ReservationRepo;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class ReservationControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ReservationRepo repo;
+
+    @BeforeEach
+    void setup() {
+        repo.deleteAll();
+    }
+
+    @Test
+    @WithMockUser
+    void getAllReservations() throws Exception {
+        //given
+        String time = "05.10.2025 03:58:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+        Reservation reservation = new Reservation("1",
+                new Presentation("1", "test", dateTime, 90, "test"),
+                1,
+                List.of(new SeatPosition(1, 1)),
+                2.5);
+        repo.save(reservation);
+        //when
+        mockMvc.perform(get("/api/reservations"))
+                //then
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(
+                        """     
+                                  [
+                                    {
+                                        "id": "1",
+                                        "presentation": {
+                                            "id": "1",
+                                            "movieName": "test",
+                                            "startsAt": "2025-10-05T03:58:00",
+                                            "durationInMinutes": 90,
+                                            "cinemaHallName": "test"
+                                        },
+                                        "amountOfSeats": 1,
+                                        "seatPositions": [
+                                            {
+                                                "row": 1,
+                                                "seatNumber": 1
+                                            }
+                                        ],
+                                        "price": 2.5
+                                    }
+                                ]
+                                """
+                ));
+    }
+
+//    @Test
+//    @WithMockUser(authorities = "ADMIN")
+//    void addNewReservation() throws Exception {
+//        String time = "05.10.2025 03:58:00";
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
+//        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+//        Presentation presentation = new Presentation("1", "test", dateTime, 90, "test");
+//        //when
+//        mockMvc.perform(post("/api/presentations").contentType(MediaType.APPLICATION_JSON).content(
+//                        """
+//                                {
+//                                        "id": "1",
+//                                        "presentation": {
+//                                            "id": "1",
+//                                            "movieName": "test",
+//                                            "startsAt": "2025-10-05T03:58:00",
+//                                            "durationInMinutes": 90,
+//                                            "cinemaHallName": "test"
+//                                        },
+//                                        "amountOfSeats": 1,
+//                                        "seatPositions": [
+//                                            {
+//                                                "row": 1,
+//                                                "seatNumber": 1
+//                                            }
+//                                        ],
+//                                        "price": 2.5
+//                                    }
+//                                """
+//                ))
+//                //then
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.content().json(
+//                        """
+//                                {
+//                                                                        "id": "1",
+//                                                                        "presentation": {
+//                                                                            "id": "1",
+//                                                                            "movieName": "test",
+//                                                                            "startsAt": "2025-10-05T03:58:00",
+//                                                                            "durationInMinutes": 90,
+//                                                                            "cinemaHallName": "test"
+//                                                                        },
+//                                                                        "amountOfSeats": 1,
+//                                                                        "seatPositions": [
+//                                                                            {
+//                                                                                "row": 1,
+//                                                                                "seatNumber": 1
+//                                                                            }
+//                                                                        ],
+//                                                                        "price": 2.5
+//                                                                    }
+//                                """
+//                        )
+//                );
+//    }
+}
