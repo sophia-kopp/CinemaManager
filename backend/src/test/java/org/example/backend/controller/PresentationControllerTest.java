@@ -1,5 +1,6 @@
 package org.example.backend.controller;
 
+import org.example.backend.model.CinemaHall;
 import org.example.backend.model.Presentation;
 import org.example.backend.repo.PresentationRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,10 +39,11 @@ class PresentationControllerTest {
     @WithMockUser
     void getAllPresentations_ShouldReturnListOfOnePresentation_WhenGetIsCalled() throws Exception {
         //given
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, hall);
         repo.save(pres1);
         //when
         mockMvc.perform(get("/api/presentations"))
@@ -55,7 +57,12 @@ class PresentationControllerTest {
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
                                 "durationInMinutes": 90,
-                                "cinemaHallName": "1"
+                                "cinemaHall": {
+                                "id": "1",
+                                "name": "test1",
+                                "rows": 4,
+                                "seatsPerRow": 4
+                                }
                                 }
                                 ]
                                 """
@@ -66,10 +73,12 @@ class PresentationControllerTest {
     @WithMockUser(authorities = "ADMIN")
     void addNewPresentation_ShouldReturnOnePresentation_WhenGetId1IsCalled() throws Exception {
         //given
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, hall);
         repo.save(pres1);
         //when
         mockMvc.perform(post("/api/presentations").contentType(MediaType.APPLICATION_JSON).content(
@@ -79,7 +88,12 @@ class PresentationControllerTest {
                                                                 "movieName": "1",
                                                                 "startsAt": "2024-08-12T11:11:11",
                                                                 "durationInMinutes": 90,
-                                                                "cinemaHallName": "1"}
+                                                                "cinemaHall": {
+                                "id": "1",
+                                "name": "test1",
+                                "rows": 4,
+                                "seatsPerRow": 4
+                                }}
                                 """
                 ))
                 //then
@@ -91,7 +105,12 @@ class PresentationControllerTest {
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
                                 "durationInMinutes": 90,
-                                "cinemaHallName": "1"}
+                                "cinemaHall": {
+                                "id": "1",
+                                "name": "test1",
+                                "rows": 4,
+                                "seatsPerRow": 4
+                                }}
                                 """
                 ));
     }
@@ -100,10 +119,12 @@ class PresentationControllerTest {
     @WithMockUser(authorities = "ADMIN")
     void updateExistingPresentation_ShouldReturnPresentationWithOldIdAndNewData_WhenUpdated() throws Exception {
         //given
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "test", dateTime, 90, "test");
+        Presentation pres1 = new Presentation("1", "test", dateTime, 90, hall);
         repo.save(pres1);
         //when
         mockMvc.perform(put("/api/presentations/1").contentType(MediaType.APPLICATION_JSON).content(
@@ -113,7 +134,12 @@ class PresentationControllerTest {
                                                                 "movieName": "testUpdate",
                                                                 "startsAt": "2024-08-12T11:11:11",
                                                                 "durationInMinutes": 90,
-                                                                "cinemaHallName": "testUpdate"}
+                                                                "cinemaHall": {
+                                "id": "1",
+                                "name": "test1",
+                                "rows": 4,
+                                "seatsPerRow": 4
+                                }}
                                 """
                 ))
                 //then
@@ -125,7 +151,12 @@ class PresentationControllerTest {
                                 "movieName": "testUpdate",
                                 "startsAt": "2024-08-12T11:11:11",
                                 "durationInMinutes": 90,
-                                "cinemaHallName": "testUpdate"}
+                                "cinemaHall": {
+                                "id": "1",
+                                "name": "test1",
+                                "rows": 4,
+                                "seatsPerRow": 4
+                                }}
                                 """
                 ));
     }
@@ -134,10 +165,12 @@ class PresentationControllerTest {
     @WithMockUser(authorities = "ADMIN")
     void deletePresentation_shouldReturnEmptyList_WhenOnlyPresentationIsDeleted() throws Exception {
         //given
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, hall);
         repo.save(pres1);
 
         mockMvc.perform(delete("/api/presentations/1"))

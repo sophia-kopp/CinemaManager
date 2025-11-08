@@ -1,5 +1,6 @@
 package org.example.backend.service;
 
+import org.example.backend.model.CinemaHall;
 import org.example.backend.model.Presentation;
 import org.example.backend.model.Reservation;
 import org.example.backend.model.SeatPosition;
@@ -29,11 +30,13 @@ class ReservationServiceTest {
     @Test
     void getAllReservations() {
 
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
         Reservation reservation = new Reservation("1",
-                new Presentation("test", "test", dateTime, 90, "test"),
+                new Presentation("test", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1,1)),
                 2.5);
@@ -51,11 +54,13 @@ class ReservationServiceTest {
 
     @Test
     void addNewReservation() {
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
         Reservation reservation = new Reservation("1",
-                new Presentation("test", "test", dateTime, 90, "test"),
+                new Presentation("test", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1,1)),
                 2.5);

@@ -1,5 +1,6 @@
 package org.example.backend.controller;
 
+import org.example.backend.model.CinemaHall;
 import org.example.backend.model.Presentation;
 import org.example.backend.model.Reservation;
 import org.example.backend.model.SeatPosition;
@@ -41,11 +42,13 @@ class ReservationControllerTest {
     @WithMockUser
     void getAllReservations() throws Exception {
         //given
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "05.10.2025 03:58:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
         Reservation reservation = new Reservation("1",
-                new Presentation("1", "test", dateTime, 90, "test"),
+                new Presentation("1", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1, 1)),
                 2.5);
@@ -64,7 +67,14 @@ class ReservationControllerTest {
                                             "movieName": "test",
                                             "startsAt": "2025-10-05T03:58:00",
                                             "durationInMinutes": 90,
-                                            "cinemaHallName": "test"
+                                            "cinemaHall": 
+                                            {
+                                "id": "1",
+                                "name": "test1",
+                                "rows": 4,
+                                "seatsPerRow": 4
+                                }
+                                            
                                         },
                                         "amountOfSeats": 1,
                                         "seatPositions": [
