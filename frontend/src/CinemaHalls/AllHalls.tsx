@@ -30,7 +30,7 @@ export default function AllHalls() {
             <h2>All Cinema Halls</h2>
             <button className={"new-hall"} onClick={onGoToNewHall}>Create new Hall</button>
             {allHalls.map(hall =>
-                <HallCard key={hall.id} hall={hall} deleteHall={setDeleteHall}/>
+                <HallCard key={hall.id} hall={hall} deleteHall={setDeleteHall} forReservation={false}/>
             )}
         </div>
     )

@@ -80,11 +80,11 @@ export default function ReservationForm() {
                     <input type={"text"} onChange={e => setAmountOfSeats(parseInt(e.target.value))}/>
                 </label>
                 {hall !== undefined &&
-
-                    <HallCard hall={hall} forReservation={true}/>
+                    <HallCard hall={hall} forReservation={true} setSeatPositions={setSeatPositions}/>
                 }
                 <button type={"submit"}>Reserve</button>
             </form>
+            <p>Your seats are:{seatPositions}</p>
             <p>Price: {price}</p>
             <p>Discount: {price}</p>
             <p>Total: {priceTotal}</p>
