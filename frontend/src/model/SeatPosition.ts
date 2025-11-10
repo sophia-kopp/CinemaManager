@@ -1,4 +1,4 @@
 export type SeatPosition = {
-    row: number
-    seatNumber: number
+    row: string
+    seatNumber: string
 }
