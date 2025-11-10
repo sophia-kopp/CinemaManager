@@ -5,12 +5,13 @@ import {useEffect, useState} from "react";
 
 type PresentationCardProps = {
     presentation: Presentation
-    deletePresentation: (id: string) => void
+    deletePresentation?: (id: string) => void
+    displayInfo?: boolean
 }
 
 export default function PresentationCard(props: Readonly<PresentationCardProps>) {
 
-    const nav= useNavigate();
+    const nav = useNavigate();
     const [date, setDate] = useState<string>("");
 
     function deletePresentation() {
@@ -18,13 +19,18 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
             .then(() => deletePresentation())
             .catch(e => console.log(e))
     }
-    function editPresentation(){
+
+    function editPresentation() {
         nav("/editPresentation/" + props.presentation.id);
     }
 
-function calculateEndsAt(){
+    function calculateEndsAt() {
         setDate((props.presentation.startsAt.toString().substring(0, 10)));
-}
+    }
+
+    function onMakeReservation() {
+        nav("/newReservation/" + props.presentation.id);
+    }
 
     useEffect(() => {
         calculateEndsAt()
@@ -34,11 +40,16 @@ function calculateEndsAt(){
         <div>
             <p>Movie: {props.presentation.movieName}</p>
             <p>Day: {date}</p>
-            <p>Starts at: {props.presentation.startsAt}</p>
-            <p>Ends at: {props.presentation.startsAt}</p>
+            <p>Starts at: {props.presentation.startsAt.toString()}</p>
+            <p>Ends at: {props.presentation.startsAt.toString()}</p>
             <p>Duration: {props.presentation.duration}</p>
-            <button onClick={deletePresentation}>Delete</button>
-            <button onClick={editPresentation}>Edit</button>
+            {!props.displayInfo &&
+                <div>
+                    <button onClick={deletePresentation}>Delete</button>
+                    <button onClick={editPresentation}>Edit</button>
+                    <button onClick={onMakeReservation}>Book this movie</button>
+                </div>
+            }
         </div>
     )
 }

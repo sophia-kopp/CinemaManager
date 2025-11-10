@@ -16,13 +16,15 @@ export default function PresentationForm() {
     const [halls, setHalls] = useState<CinemaHall[]>([]);
 
     const [selectedMovie, setSelectedMovie] = useState<string>("");
-    const [selectedHall, setSelectedHall] = useState<string>("");
+    const [selectedHall, setSelectedHall] = useState<CinemaHall>({id: "", name: "", rows: 0, seatsPerRow: 0});
+    const [selectedHallName, setSelectedHallName] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("");
     const [duration, setDuration] = useState<number>(0);
 
     const [validForm, setValidForm] = useState<boolean>(false);
 
     function loadHalls() {
+        console.log("getHalls")
         axios.get("/api/halls")
             .then(r => setHalls(r.data))
             .catch(e => console.log(e));
@@ -37,7 +39,7 @@ export default function PresentationForm() {
     function loadExistingPresentation() {
         axios.get("/api/presentations/" + param.id)
             .then(r => {
-                    setSelectedHall(r.data.cinemaHallName)
+                    setSelectedHall(r.data.cinemaHall)
                     setSelectedMovie(r.data.movieName)
                     setStartDate(r.data.startsAt)
                     setDuration(r.data.duration)
@@ -49,7 +51,7 @@ export default function PresentationForm() {
     }
 
     function validateForm() {
-        if (duration !== 0 && startDate !== "" && selectedHall !== "" && selectedMovie !== "") {
+        if (duration !== 0 && startDate !== "" && selectedHall.id !== "" && selectedMovie !== "") {
             setValidForm(true);
         } else {
             setValidForm(false);
@@ -57,11 +59,15 @@ export default function PresentationForm() {
         }
     }
 
+    function updateSelectedHall() {
+        setSelectedHall(halls.filter(h=> h.name === selectedHallName)[0]);
+    }
+
     function submitPresentation(e: FormEvent) {
         e.preventDefault()
         const presentation: PresentationDto = {
             movieName: selectedMovie,
-            cinemaHallName: selectedHall,
+            cinemaHall: selectedHall,
             startsAt: new Date(startDate),
             duration: duration,
         }
@@ -93,6 +99,10 @@ export default function PresentationForm() {
         validateForm()
     }, [selectedMovie, selectedHall, startDate, duration]);
 
+    useEffect(() => {
+        updateSelectedHall();
+    }, [selectedHallName]);
+
     return (
         <form onSubmit={submitPresentation} className={"presentation-form"}>
             <label>Movie:
@@ -104,7 +114,8 @@ export default function PresentationForm() {
                 </select>
             </label>
             <label>Hall:
-                <select value={selectedHall} onChange={e => setSelectedHall(e.target.value)}>
+                <select value={selectedHallName} onChange={e =>
+                    setSelectedHallName(e.target.value)}>
                     <option value={""}>Select a hall...</option>
                     {halls.map(h =>
                         <option value={h.name}>{h.name}</option>
