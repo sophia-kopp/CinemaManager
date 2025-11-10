@@ -8,3 +8,10 @@ export type Reservation = {
     seatPositions: SeatPosition[]
     price: number
 }
+
+export type ReservationDto = {
+    presentation: Presentation
+    amountOfSeats: number,
+    seatPositions: SeatPosition[]
+    price: number
+}
