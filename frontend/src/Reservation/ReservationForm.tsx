@@ -76,12 +76,12 @@ export default function ReservationForm() {
         <div>
             <PresentationCard presentation={presentation} displayInfo={true}/>
             <form onSubmit={saveReservation}>
-                <p>Amount of Seats: {seatPositions.length}</p>
                 {hall !== undefined &&
                     <HallCard hall={hall} forReservation={true} setSeatPositions={setSeatPositions}/>
                 }
                 <button type={"submit"}>Reserve</button>
             </form>
+            <p>Amount of Seats: {seatPositions.length}</p>
             <p>Price: {price}</p>
             <p>Discount: {price}</p>
             <p>Total: {priceTotal}</p>
