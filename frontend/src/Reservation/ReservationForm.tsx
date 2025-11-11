@@ -77,7 +77,7 @@ export default function ReservationForm() {
             <PresentationCard presentation={presentation} displayInfo={true}/>
             <form onSubmit={saveReservation}>
                 <label>Amount of Seats:
-                    <input type={"text"} onChange={e => setAmountOfSeats(parseInt(e.target.value))}/>
+                    <input type={"text"} onChange={e => setAmountOfSeats(Number.parseInt(e.target.value))}/>
                 </label>
                 {hall !== undefined &&
                     <HallCard hall={hall} forReservation={true} setSeatPositions={setSeatPositions}/>

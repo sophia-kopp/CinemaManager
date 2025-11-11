@@ -60,7 +60,7 @@ export default function PresentationForm() {
     }
 
     function updateSelectedHall() {
-        setSelectedHall(halls.filter(h=> h.name === selectedHallName)[0]);
+        setSelectedHall(halls.filter(h => h.name === selectedHallName)[0]);
     }
 
     function submitPresentation(e: FormEvent) {

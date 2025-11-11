@@ -18,8 +18,9 @@ export default function HallCard(props: Readonly<HallCardProps>) {
 
     const [rows, setRows] = useState<string[]>([]);
     const [seatNumber, setSeatNumber] = useState<string[]>([]);
-    const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
     const [activeSeat, setActiveSeat] = useState<string>("");
+
+    const selectedSeats = [];
 
     function onEditHall() {
         nav("/editHall/" + props.hall.id);
@@ -42,19 +43,18 @@ export default function HallCard(props: Readonly<HallCardProps>) {
     function loadRowLetter() {
         const rowLettersArray: string[] = [];
         for (let i = 1; i <= props.hall.seatsPerRow; i++) {
-            rowLettersArray.push(String.fromCharCode(96 + i));
+            rowLettersArray.push(String.fromCodePoint(96 + i));
         }
         setRows(rowLettersArray);
     }
 
     function onSelectSeatPositions(e: string) {
-        if (!selectedSeats.includes(e)) {
+        if (selectedSeats.includes(e)) {
+            selectedSeats.splice(selectedSeats.indexOf(e), 1)
+            setActiveSeat("")
+        } else {
             selectedSeats.push(e)
             setActiveSeat("activeSeat")
-        } else {
-            selectedSeats.indexOf(e);
-            selectedSeats.splice(selectedSeats.indexOf(e),1)
-            setActiveSeat("")
         }
         console.log(selectedSeats)
     }
@@ -65,11 +65,11 @@ export default function HallCard(props: Readonly<HallCardProps>) {
         props.setSeatPositions(selectedSeats);
     }
 
-
     useEffect(() => {
         loadRowLetter();
         loadSeatNumber();
     }, []);
+
     return (
         <div className={"hall-card"}>
             <h3>{props.hall.name}</h3>
@@ -81,8 +81,8 @@ export default function HallCard(props: Readonly<HallCardProps>) {
                     <div key={row} className={"seatsPerRow"}>
                         {row.toUpperCase()}
                         {[...seatNumber].map((seat) => {
-                                return <div  onClick={() => onSelectSeatPositions(row + seat)}>
-                                   <Seat activeSeat={activeSeat} seatNumber={seat}/>
+                                return <div key={seat} onClick={() => onSelectSeatPositions(row + seat)}>
+                                    <Seat activeSeat={activeSeat} seatNumber={seat}/>
                                 </div>
                             }
                         )}
