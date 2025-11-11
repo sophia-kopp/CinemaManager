@@ -3,7 +3,7 @@ import './HallCard.css';
 import Seat from "./Seats/Seat.tsx";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {type FormEvent, useEffect, useState} from "react";
 import type {SeatPosition} from "../../model/SeatPosition.ts";
 
 type HallCardProps = {
@@ -18,9 +18,9 @@ export default function HallCard(props: Readonly<HallCardProps>) {
 
     const [rows, setRows] = useState<string[]>([]);
     const [seatNumber, setSeatNumber] = useState<string[]>([]);
-    const [activeSeat, setActiveSeat] = useState<string>("");
 
-    const selectedSeats = [];
+    const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+
 
     function onEditHall() {
         nav("/editHall/" + props.hall.id);
@@ -51,18 +51,21 @@ export default function HallCard(props: Readonly<HallCardProps>) {
     function onSelectSeatPositions(e: string) {
         if (selectedSeats.includes(e)) {
             selectedSeats.splice(selectedSeats.indexOf(e), 1)
-            setActiveSeat("")
         } else {
             selectedSeats.push(e)
-            setActiveSeat("activeSeat")
         }
         console.log(selectedSeats)
     }
 
-    function onConfirmSeatPosition(e) {
+    function onConfirmSeatPosition(e: FormEvent) {
         e.preventDefault();
         console.log("set selectedSeat", selectedSeats);
-        props.setSeatPositions(selectedSeats);
+
+        if (selectedSeats !== undefined){
+        props.setSeatPositions(selectedSeats.map((s): SeatPosition =>
+            ({row: s.substring(0,1),
+                seatNumber: s.substring(1)})));
+        }
     }
 
     useEffect(() => {
@@ -82,7 +85,7 @@ export default function HallCard(props: Readonly<HallCardProps>) {
                         {row.toUpperCase()}
                         {[...seatNumber].map((seat) => {
                                 return <div key={seat} onClick={() => onSelectSeatPositions(row + seat)}>
-                                    <Seat activeSeat={activeSeat} seatNumber={seat}/>
+                                    <Seat seatNumber={seat}/>
                                 </div>
                             }
                         )}

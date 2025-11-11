@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
+import {type FormEvent, useEffect, useState} from "react";
 import type {Presentation} from "../model/Presentation.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import PresentationCard from "../Schedule/PresentationCard/PresentationCard.tsx";
 import HallCard from "../CinemaHalls/HallCard/HallCard.tsx";
 import type {CinemaHall} from "../model/CinemaHall.ts";
-import type {ReservationDto} from "../model/Reservation.ts";
 import type {SeatPosition} from "../model/SeatPosition.ts";
+
 
 export default function ReservationForm() {
 
@@ -41,14 +41,13 @@ export default function ReservationForm() {
         }
     }
 
-    function saveReservation() {
-        const reservationDto: ReservationDto = {
-            presentation: presentation,
+    function saveReservation(e:FormEvent) {
+        e.preventDefault();
+        axios.post("/api/reservations",
+            {presentation: presentation,
             amountOfSeats: amountOfSeats,
             seatPositions: seatPositions,
-            price: price
-        }
-        axios.post("api/reservations", reservation)
+            price: price})
             .then(() => nav("/allReservations"))
             .catch(e => console.log(e))
     }
@@ -85,7 +84,7 @@ export default function ReservationForm() {
                 }
                 <button type={"submit"}>Reserve</button>
             </form>
-            <p>Your seats are:{seatPositions}</p>
+            <p>Your seats are:{seatPositions.map(x=>  x.row + x.seatNumber)}</p>
             <p>Price: {price}</p>
             <p>Discount: {price}</p>
             <p>Total: {priceTotal}</p>
