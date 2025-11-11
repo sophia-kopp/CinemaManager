@@ -3,6 +3,7 @@ package org.example.backend.controller;
 import org.example.backend.model.Reservation;
 import org.example.backend.model.ReservationDto;
 import org.example.backend.service.ReservationService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,17 @@ public class ReservationController {
     }
 
     @GetMapping
-    public List<Reservation> getAllReservations(){
+    public List<Reservation> getAllReservations() {
         return service.getAllReservations();
     }
 
     @PostMapping
-    public Reservation addNewReservation(@RequestBody ReservationDto reservationDto){
+    public Reservation addNewReservation(@RequestBody ReservationDto reservationDto) {
         return service.addNewReservation(reservationDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteReservation(@PathVariable String id) {
+        service.deleteReservationById(id);
     }
 }
