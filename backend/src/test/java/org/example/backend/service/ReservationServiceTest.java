@@ -1,9 +1,6 @@
 package org.example.backend.service;
 
-import org.example.backend.model.CinemaHall;
-import org.example.backend.model.Presentation;
-import org.example.backend.model.Reservation;
-import org.example.backend.model.SeatPosition;
+import org.example.backend.model.*;
 import org.example.backend.repo.ReservationRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +17,13 @@ class ReservationServiceTest {
 
     private ReservationRepo mockRepo;
     private ReservationService service;
+    private IdService mockIdService;
 
     @BeforeEach
     void setup() {
         mockRepo = mock(ReservationRepo.class);
-        service = new ReservationService(mockRepo);
+        mockIdService =mock(IdService.class);
+        service = new ReservationService(mockRepo, mockIdService);
     }
 
     @Test
@@ -64,10 +63,16 @@ class ReservationServiceTest {
                 1,
                 List.of(new SeatPosition(1,1)),
                 2.5);
+        ReservationDto reservationDto = new ReservationDto(
+                new Presentation("test", "test", dateTime, 90, hall),
+                1,
+                List.of(new SeatPosition(1,1)),
+                2.5);
 
         //WHEN
+        when(mockIdService.generateUUid()).thenReturn("1");
         when(mockRepo.save(reservation)).thenReturn(reservation);
-        Reservation actual = service.addNewReservation(reservation);
+        Reservation actual = service.addNewReservation(reservationDto);
 
         //THEN
         verify(mockRepo).save(reservation);
