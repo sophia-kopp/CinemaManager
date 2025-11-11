@@ -42,14 +42,15 @@ export default function ReservationForm() {
     }
 
     function saveReservation() {
-        const reservation: ReservationDto = {
+        const reservationDto: ReservationDto = {
             presentation: presentation,
             amountOfSeats: amountOfSeats,
             seatPositions: seatPositions,
             price: price
         }
-        axios.post("api/reservations", reservation).then(()=>nav("/reservations"))
-            .catch(e=> console.log(e))
+        axios.post("api/reservations", reservation)
+            .then(() => nav("/allReservations"))
+            .catch(e => console.log(e))
     }
 
     useEffect(() => {

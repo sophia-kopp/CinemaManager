@@ -10,7 +10,7 @@ type HallCardProps = {
     hall: CinemaHall
     deleteHall?: (id: string) => void
     forReservation?: boolean
-    setSeatPositions: (seats: SeatPosition[]) => void
+    setSeatPositions?: (seats: SeatPosition[]) => void
 }
 export default function HallCard(props: Readonly<HallCardProps>) {
 
