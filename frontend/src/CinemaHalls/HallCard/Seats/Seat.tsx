@@ -1,6 +1,6 @@
 import './Seats.css'
 
-export type SeatProps  = {
+export type SeatProps = {
     seatNumber: string
 }
 
