@@ -45,7 +45,7 @@ public class PresentationService {
                 presentation.movieName(),
                 presentation.startsAt(),
                 presentation.durationInMinutes(),
-                presentation.cinemaHallName());
+                presentation.cinemaHall());
         repo.save(updatedPresentation);
         return updatedPresentation;
     }

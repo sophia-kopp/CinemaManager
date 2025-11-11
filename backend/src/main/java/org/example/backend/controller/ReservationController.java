@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.Reservation;
+import org.example.backend.model.ReservationDto;
 import org.example.backend.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class ReservationController {
     }
 
     @PostMapping
-    public Reservation addNewReservation(@RequestBody Reservation reservation){
-        return service.addNewReservation(reservation);
+    public Reservation addNewReservation(@RequestBody ReservationDto reservationDto){
+        return service.addNewReservation(reservationDto);
     }
 }

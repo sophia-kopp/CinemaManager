@@ -1,4 +1,4 @@
 package org.example.backend.model;
 
-public record SeatPosition(int row, int seatNumber) {
+public record SeatPosition(String row, String seatNumber) {
 }

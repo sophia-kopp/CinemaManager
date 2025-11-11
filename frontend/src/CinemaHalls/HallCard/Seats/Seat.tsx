@@ -1,7 +1,11 @@
 import './Seats.css'
 
-export default function Seat() {
+export type SeatProps  = {
+    seatNumber: string
+}
+
+export default function Seat(props: Readonly<SeatProps>) {
     return (
-        <span className="circle"></span>
+        <span className="circle">{props.seatNumber}</span>
     )
 }

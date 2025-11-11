@@ -9,3 +9,7 @@
 .circle:hover{
     background-color: dodgerblue;
 }
+
+#activeSeat{
+    background-color: greenyellow;
+}

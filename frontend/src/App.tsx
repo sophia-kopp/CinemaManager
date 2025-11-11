@@ -14,6 +14,7 @@ import ProtectedRoute from "./MainPage/ProtectedRoute.tsx";
 import {useState} from "react";
 import Login from "./MainPage/Login.tsx";
 import AllReservations from "./Reservation/AllReservations.tsx";
+import ReservationForm from "./Reservation/ReservationForm.tsx";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                         <Route path={"/newPresentation"} element={<PresentationForm/>}/>
                         <Route path={"/editPresentation/:id"} element={<PresentationForm/>}/>
                         <Route path={"/allReservations"} element={<AllReservations/>}/>
+                        <Route path={"/newReservation/:id"} element={<ReservationForm/>}/>
                     </Route>
                 </Routes>
             </div>

@@ -6,5 +6,5 @@ public record Presentation(String id,
                            String movieName,
                            LocalDateTime startsAt,
                            int durationInMinutes,
-                           String cinemaHallName) {
+                           CinemaHall cinemaHall) {
 }

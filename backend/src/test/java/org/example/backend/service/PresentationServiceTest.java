@@ -1,6 +1,7 @@
 package org.example.backend.service;
 
 import org.example.backend.exceptions.PresentationNotFoundException;
+import org.example.backend.model.CinemaHall;
 import org.example.backend.model.Presentation;
 import org.example.backend.repo.PresentationRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,11 +31,13 @@ class PresentationServiceTest {
     @Test
     void getAllPresentations_ShouldReturnListOfPresentations_WhenServiceGetAllIsCalled() {
         //GIVEN
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
-        Presentation pres2 = new Presentation("2", "2", dateTime, 90, "2");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, hall);
+        Presentation pres2 = new Presentation("2", "2", dateTime, 90, hall);
 
         List<Presentation> presentations = List.of(pres1, pres2);
 
@@ -50,10 +53,12 @@ class PresentationServiceTest {
     @Test
     void addNewPresentation_ShouldReturnPresentation_WhenPresentationIsAdded() {
         //GIVEN
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, hall);
 
         //WHEN
         when(mockRepo.save(pres1)).thenReturn(pres1);
@@ -66,11 +71,13 @@ class PresentationServiceTest {
     @Test
     void updateExistingPresentation_ShouldReturnUpdatedPresentation_WhenPresentationIsAdded() {
         //GIVEN
+
+        CinemaHall hall = new CinemaHall("1", "test1", 4, 4);
         String time = "12.08.2024 11:11:11";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-        Presentation pres1 = new Presentation("1", "1", dateTime, 90, "1");
-        Presentation updatedPres = new Presentation("1", "updated", dateTime, 90, "updated");
+        Presentation pres1 = new Presentation("1", "1", dateTime, 90, hall);
+        Presentation updatedPres = new Presentation("1", "updated", dateTime, 90, hall);
 
         //WHEN
         when(mockRepo.findById("1")).thenReturn(Optional.of(pres1));

@@ -3,6 +3,7 @@
     border-radius: 5px;
     width: 700px;
     margin: 10px;
+    padding: 5px;
 }
 
 .rows {
@@ -24,7 +25,8 @@
 }
 
 .seatsPerRow {
-    flex-direction: column;
+    display: flex;
+    justify-content: center;
 }
 
 .buttons{
@@ -32,4 +34,16 @@
 }
 .button-copied{
     background-color: green;
+}
+
+.circle {
+    height: 25px;
+    width: 25px;
+    background-color: darkblue;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 1px;
+}
+.circle:hover{
+    background-color: dodgerblue;
 }
