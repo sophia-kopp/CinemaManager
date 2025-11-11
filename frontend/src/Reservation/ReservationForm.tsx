@@ -45,7 +45,7 @@ export default function ReservationForm() {
         e.preventDefault();
         axios.post("/api/reservations",
             {presentation: presentation,
-            amountOfSeats: amountOfSeats,
+            amountOfSeats: seatPositions.length,
             seatPositions: seatPositions,
             price: price})
             .then(() => nav("/allReservations"))
@@ -76,15 +76,12 @@ export default function ReservationForm() {
         <div>
             <PresentationCard presentation={presentation} displayInfo={true}/>
             <form onSubmit={saveReservation}>
-                <label>Amount of Seats:
-                    <input type={"text"} onChange={e => setAmountOfSeats(Number.parseInt(e.target.value))}/>
-                </label>
                 {hall !== undefined &&
                     <HallCard hall={hall} forReservation={true} setSeatPositions={setSeatPositions}/>
                 }
                 <button type={"submit"}>Reserve</button>
             </form>
-            <p>Your seats are:{seatPositions.map(x=>  x.row + x.seatNumber)}</p>
+            <p>Amount of Seats: {seatPositions.length}</p>
             <p>Price: {price}</p>
             <p>Discount: {price}</p>
             <p>Total: {priceTotal}</p>

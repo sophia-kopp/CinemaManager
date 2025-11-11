@@ -47,3 +47,7 @@
 .circle:hover{
     background-color: dodgerblue;
 }
+.seats {
+    background-color: darkblue;
+    border-radius: 50%;
+}
