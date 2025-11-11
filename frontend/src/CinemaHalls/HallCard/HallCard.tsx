@@ -20,7 +20,6 @@ export default function HallCard(props: Readonly<HallCardProps>) {
     const [seatNumber, setSeatNumber] = useState<string[]>([]);
 
     const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
-    const [displayedSeats, setDisplayedSeats] = useState<string[]>([]);
 
 
     function onEditHall() {
@@ -66,11 +65,6 @@ export default function HallCard(props: Readonly<HallCardProps>) {
         console.log(selectedSeats)
     }
 
-
-    function loadDisplayedSeats(){
-
-    }
-
     function onConfirmSeatPosition(e: FormEvent) {
         e.preventDefault();
         if (selectedSeats !== undefined) {
@@ -86,10 +80,6 @@ export default function HallCard(props: Readonly<HallCardProps>) {
         loadRowLetter();
         loadSeatNumber();
     }, []);
-
-    useEffect(() => {
-        loadDisplayedSeats()
-    }, [selectedSeats]);
 
 
     return (
