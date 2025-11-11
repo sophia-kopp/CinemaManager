@@ -51,7 +51,7 @@ class ReservationControllerTest {
                 new Presentation("1", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1, 1)),
-                2.5);
+                20);
         repo.save(reservation);
         //when
         mockMvc.perform(get("/api/reservations"))

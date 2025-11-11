@@ -38,7 +38,7 @@ class ReservationServiceTest {
                 new Presentation("test", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1,1)),
-                2.5);
+                20);
 
         List<Reservation> reservations = List.of(reservation);
 
@@ -62,12 +62,12 @@ class ReservationServiceTest {
                 new Presentation("test", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1,1)),
-                2.5);
+                20);
         ReservationDto reservationDto = new ReservationDto(
                 new Presentation("test", "test", dateTime, 90, hall),
                 1,
                 List.of(new SeatPosition(1,1)),
-                2.5);
+                20);
 
         //WHEN
         when(mockIdService.generateUUid()).thenReturn("1");
