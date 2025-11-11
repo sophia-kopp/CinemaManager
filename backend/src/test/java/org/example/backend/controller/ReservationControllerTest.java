@@ -4,14 +4,14 @@ import org.example.backend.model.CinemaHall;
 import org.example.backend.model.Presentation;
 import org.example.backend.model.Reservation;
 import org.example.backend.model.SeatPosition;
-import org.example.backend.repo.PresentationRepo;
+
 import org.example.backend.repo.ReservationRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -50,7 +50,7 @@ class ReservationControllerTest {
         Reservation reservation = new Reservation("1",
                 new Presentation("1", "test", dateTime, 90, hall),
                 1,
-                List.of(new SeatPosition(1, 1)),
+                List.of(new SeatPosition("1", "1")),
                 20);
         repo.save(reservation);
         //when
@@ -67,23 +67,22 @@ class ReservationControllerTest {
                                             "movieName": "test",
                                             "startsAt": "2025-10-05T03:58:00",
                                             "durationInMinutes": 90,
-                                            "cinemaHall": 
+                                            "cinemaHall":
                                             {
                                 "id": "1",
                                 "name": "test1",
                                 "rows": 4,
                                 "seatsPerRow": 4
                                 }
-                                            
                                         },
                                         "amountOfSeats": 1,
                                         "seatPositions": [
                                             {
-                                                "row": 1,
-                                                "seatNumber": 1
+                                                "row": "1",
+                                                "seatNumber": "1"
                                             }
                                         ],
-                                        "price": 2.5
+                                        "price": 20
                                     }
                                 ]
                                 """

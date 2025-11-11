@@ -4,7 +4,6 @@ import org.example.backend.model.*;
 import org.example.backend.repo.ReservationRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.core.parameters.P;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,7 +36,7 @@ class ReservationServiceTest {
         Reservation reservation = new Reservation("1",
                 new Presentation("test", "test", dateTime, 90, hall),
                 1,
-                List.of(new SeatPosition(1,1)),
+                List.of(new SeatPosition("1","1")),
                 20);
 
         List<Reservation> reservations = List.of(reservation);
@@ -61,12 +60,12 @@ class ReservationServiceTest {
         Reservation reservation = new Reservation("1",
                 new Presentation("test", "test", dateTime, 90, hall),
                 1,
-                List.of(new SeatPosition(1,1)),
+                List.of(new SeatPosition("1","1")),
                 20);
         ReservationDto reservationDto = new ReservationDto(
                 new Presentation("test", "test", dateTime, 90, hall),
                 1,
-                List.of(new SeatPosition(1,1)),
+                List.of(new SeatPosition("1","1")),
                 20);
 
         //WHEN
