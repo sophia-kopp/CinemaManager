@@ -56,7 +56,7 @@ class PresentationControllerTest {
                                 "id": "1",
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
-                                "durationInMinutes": 90,
+                                "duration": 90,
                                 "cinemaHall": {
                                 "id": "1",
                                 "name": "test1",
@@ -87,7 +87,7 @@ class PresentationControllerTest {
                                                                    "id": "1",
                                                                 "movieName": "1",
                                                                 "startsAt": "2024-08-12T11:11:11",
-                                                                "durationInMinutes": 90,
+                                                                "duration": 90,
                                                                 "cinemaHall": {
                                 "id": "1",
                                 "name": "test1",
@@ -104,7 +104,7 @@ class PresentationControllerTest {
                                    "id": "1",
                                 "movieName": "1",
                                 "startsAt": "2024-08-12T11:11:11",
-                                "durationInMinutes": 90,
+                                "duration": 90,
                                 "cinemaHall": {
                                 "id": "1",
                                 "name": "test1",
@@ -133,7 +133,7 @@ class PresentationControllerTest {
                                                                    "id": "1",
                                                                 "movieName": "testUpdate",
                                                                 "startsAt": "2024-08-12T11:11:11",
-                                                                "durationInMinutes": 90,
+                                                                "duration": 90,
                                                                 "cinemaHall": {
                                 "id": "1",
                                 "name": "test1",
@@ -150,7 +150,7 @@ class PresentationControllerTest {
                                    "id": "1",
                                 "movieName": "testUpdate",
                                 "startsAt": "2024-08-12T11:11:11",
-                                "durationInMinutes": 90,
+                                "duration": 90,
                                 "cinemaHall": {
                                 "id": "1",
                                 "name": "test1",
