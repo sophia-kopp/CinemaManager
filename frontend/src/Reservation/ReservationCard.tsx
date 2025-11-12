@@ -1,8 +1,7 @@
 import axios from "axios";
 import type {Reservation} from "../model/Reservation.ts";
-import {GiPerson} from "react-icons/gi";
 import {useEffect, useState} from "react";
-import {GiTrashCan, GiPriceTag} from "react-icons/gi";
+import {GiTrashCan, GiPriceTag, GiPerson} from "react-icons/gi";
 
 type ReservationCardProps = {
     reservation: Reservation
@@ -46,9 +45,10 @@ export default function ReservationCard(props: Readonly<ReservationCardProps>) {
                 <div className={"seat-list"}>
                     <h5>Seats: </h5>
                     <div className={"seat-position"}>
-                    {props.reservation.seatPositions.map(seat =>
-                        <p>Row: {seat.row.toUpperCase()} - Seat: {seat.seatNumber}</p>
-                    )}
+                        {props.reservation.seatPositions.map(seat =>
+                            <p key={seat.row + seat.seatNumber}>
+                                Row: {seat.row.toUpperCase()} - Seat: {seat.seatNumber}</p>
+                        )}
                     </div>
                 </div>
                 <button onClick={deleteReservation}><GiTrashCan/>Delete</button>
