@@ -105,7 +105,7 @@ class ReservationControllerTest {
 //                                            "id": "1",
 //                                            "movieName": "test",
 //                                            "startsAt": "2025-10-05T03:58:00",
-//                                            "durationInMinutes": 90,
+//                                            "duration": 90,
 //                                            "cinemaHallName": "test"
 //                                        },
 //                                        "amountOfSeats": 1,
@@ -129,7 +129,7 @@ class ReservationControllerTest {
 //                                                                            "id": "1",
 //                                                                            "movieName": "test",
 //                                                                            "startsAt": "2025-10-05T03:58:00",
-//                                                                            "durationInMinutes": 90,
+//                                                                            "duration": 90,
 //                                                                            "cinemaHallName": "test"
 //                                                                        },
 //                                                                        "amountOfSeats": 1,
