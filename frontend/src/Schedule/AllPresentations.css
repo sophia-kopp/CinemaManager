@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-self: center;
+    width: 100%;
+    align-items: center;
 }
 .presentations-header{
     align-self: center;

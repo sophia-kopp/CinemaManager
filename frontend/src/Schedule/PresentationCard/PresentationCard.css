@@ -1,7 +1,7 @@
 .presentation-card {
     border: 2px solid #535bf2;
     border-radius: 5px;
-    width: fit-content;
+    width: 60%;;
     margin: 5px;
 }
 :hover{

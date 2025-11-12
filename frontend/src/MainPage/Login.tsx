@@ -21,7 +21,7 @@ export default function Login(props: Readonly<LoginProps>) {
     const loadUser = () => {
         axios.get("api/auth/me")
             .then(r => {
-                props.setUser(r.data)
+                props.setUser(r.data.username)
                 nav("/")
             })
             .catch(() => props.setUser(null));

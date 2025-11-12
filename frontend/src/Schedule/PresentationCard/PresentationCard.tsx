@@ -34,9 +34,21 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
         nav("/newReservation/" + props.presentation.id);
     }
 
-
     useEffect(() => {
         calculateEndsAt()
+    }, []);
+    const [userRole, setUserRole] = useState<string>("");
+
+    const loadUser = () => {
+        axios.get("api/auth/me")
+            .then(r => {
+                setUserRole(r.data.role)
+            })
+            .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        loadUser()
     }, []);
 
     return (
@@ -47,12 +59,15 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
             <p>Duration: {props.presentation.duration}</p>
             {!props.displayInfo &&
                 <div>
-                    <button onClick={deletePresentation}>
-                        <GiTrashCan/> Delete
-                    </button>
-                    <button onClick={editPresentation}>
-                        <GiPencil/> Edit
-                    </button>
+                    {userRole === "ADMIN" &&
+                        <div>
+                            <button onClick={deletePresentation}>
+                                <GiTrashCan/> Delete
+                            </button>
+                            <button onClick={editPresentation}>
+                                <GiPencil/> Edit
+                            </button>
+                        </div>}
                     <button onClick={onMakeReservation}>
                         <GiClapperboard/> Book this movie
                     </button>
