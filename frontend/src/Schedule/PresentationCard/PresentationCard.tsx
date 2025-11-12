@@ -48,13 +48,13 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
             {!props.displayInfo &&
                 <div>
                     <button onClick={deletePresentation}>
-                        <GiTrashCan/>Delete
+                        <GiTrashCan/> Delete
                     </button>
                     <button onClick={editPresentation}>
-                        <GiPencil/>Edit
+                        <GiPencil/> Edit
                     </button>
                     <button onClick={onMakeReservation}>
-                        <GiClapperboard/>Book this movie
+                        <GiClapperboard/> Book this movie
                     </button>
                 </div>
             }
