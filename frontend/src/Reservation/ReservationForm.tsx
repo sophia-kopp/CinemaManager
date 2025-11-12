@@ -6,6 +6,7 @@ import PresentationCard from "../Schedule/PresentationCard/PresentationCard.tsx"
 import HallCard from "../CinemaHalls/HallCard/HallCard.tsx";
 import type {CinemaHall} from "../model/CinemaHall.ts";
 import type {SeatPosition} from "../model/SeatPosition.ts";
+import "./ReservationForm.css";
 
 
 export default function ReservationForm() {
@@ -23,6 +24,7 @@ export default function ReservationForm() {
     const [amountOfSeats, setAmountOfSeats] = useState<number>(0);
     const [hall, setHall] = useState<CinemaHall | undefined>(undefined);
     const [seatPositions, setSeatPositions] = useState<SeatPosition[]>([]);
+    const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(false);
 
     const param = useParams();
     const nav = useNavigate();
@@ -41,15 +43,25 @@ export default function ReservationForm() {
         }
     }
 
-    function saveReservation(e:FormEvent) {
+    function saveReservation(e: FormEvent) {
         e.preventDefault();
         axios.post("/api/reservations",
-            {presentation: presentation,
-            amountOfSeats: seatPositions.length,
-            seatPositions: seatPositions,
-            price: price})
+            {
+                presentation: presentation,
+                amountOfSeats: seatPositions.length,
+                seatPositions: seatPositions,
+                price: price
+            })
             .then(() => nav("/allReservations"))
             .catch(e => console.log(e))
+    }
+
+    function onDisableSubmitButton() {
+        if (seatPositions.length === 0) {
+            setDisableSubmitButton(true)
+        } else {
+            setDisableSubmitButton(false)
+        }
     }
 
     useEffect(() => {
@@ -66,22 +78,28 @@ export default function ReservationForm() {
         setPrice(amountOfSeats * 10)
         setDiscount(amountOfSeats * 10)
     }, [amountOfSeats]);
+    useEffect(() => {
+        setAmountOfSeats(seatPositions.length)
+
+    }, [seatPositions]);
 
     useEffect(() => {
         setPriceTotal(price - discount)
     }, [discount, price]);
-
+    useEffect(() => {
+        onDisableSubmitButton()
+    }, [seatPositions]);
 
     return (
-        <div>
+        <div className={"reservation-form"}>
             <PresentationCard presentation={presentation} displayInfo={true}/>
             <form onSubmit={saveReservation}>
                 {hall !== undefined &&
                     <HallCard hall={hall} forReservation={true} setSeatPositions={setSeatPositions}/>
                 }
-                <button type={"submit"}>Reserve</button>
+                <button disabled={disableSubmitButton} type={"submit"}>Reserve</button>
             </form>
-            <p>Amount of Seats: {seatPositions.length}</p>
+            <p>Amount of Seats: {amountOfSeats}</p>
             <p>Price: {price}</p>
             <p>Discount: {price}</p>
             <p>Total: {priceTotal}</p>

@@ -3,6 +3,7 @@ import type {Presentation} from "../model/Presentation.ts";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import PresentationCard from "./PresentationCard/PresentationCard.tsx";
+import './AllPresentations.css';
 
 export default function AllPresentations() {
     const [presentations, setPresentations] = useState<Presentation[]>([]);
@@ -29,12 +30,15 @@ export default function AllPresentations() {
     }
 
     return (
-        <>
+        <div className={"all-presentations"}>
+            <div className={"presentations-header"}>
+
             <h3>All Presentations</h3>
             <button onClick={addNewPresentation}>Add New Presentation</button>
+            </div>
             {presentations.map(p =>
                 <PresentationCard presentation={p} deletePresentation={setDeletePresentation}/>
             )}
-        </>
+        </div>
     )
 }

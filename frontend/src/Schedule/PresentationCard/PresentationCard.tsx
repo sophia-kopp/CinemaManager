@@ -2,6 +2,8 @@ import type {Presentation} from "../../model/Presentation.ts";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import './PresentationCard.css';
+import {GiPencil, GiTrashCan, GiClapperboard} from "react-icons/gi";
 
 type PresentationCardProps = {
     presentation: Presentation
@@ -32,22 +34,28 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
         nav("/newReservation/" + props.presentation.id);
     }
 
+
     useEffect(() => {
         calculateEndsAt()
     }, []);
 
     return (
-        <div>
+        <div className={"presentation-card"}>
             <p>Movie: {props.presentation.movieName}</p>
             <p>Day: {date}</p>
-            <p>Starts at: {props.presentation.startsAt.toString()}</p>
-            <p>Ends at: {props.presentation.startsAt.toString()}</p>
+            <p>Starts at: {props.presentation.startsAt.toString().substring(11, 16)}</p>
             <p>Duration: {props.presentation.duration}</p>
             {!props.displayInfo &&
                 <div>
-                    <button onClick={deletePresentation}>Delete</button>
-                    <button onClick={editPresentation}>Edit</button>
-                    <button onClick={onMakeReservation}>Book this movie</button>
+                    <button onClick={deletePresentation}>
+                        <GiTrashCan/> Delete
+                    </button>
+                    <button onClick={editPresentation}>
+                        <GiPencil/> Edit
+                    </button>
+                    <button onClick={onMakeReservation}>
+                        <GiClapperboard/> Book this movie
+                    </button>
                 </div>
             }
         </div>

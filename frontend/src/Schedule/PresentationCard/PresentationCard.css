@@ -1,0 +1,9 @@
+.presentation-card {
+    border: 2px solid #535bf2;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 5px;
+}
+:hover{
+    filter: drop-shadow(0 0 2em #646cffaa);
+}

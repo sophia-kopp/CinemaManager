@@ -24,7 +24,6 @@ export default function PresentationForm() {
     const [validForm, setValidForm] = useState<boolean>(false);
 
     function loadHalls() {
-        console.log("getHalls")
         axios.get("/api/halls")
             .then(r => setHalls(r.data))
             .catch(e => console.log(e));
@@ -73,6 +72,7 @@ export default function PresentationForm() {
         }
 
         if (param.id === undefined) {
+            console.log("duration", presentation.duration);
             axios.post("/api/presentations", presentation)
                 .then((r) => {
                     nav("/allPresentations")
@@ -128,7 +128,7 @@ export default function PresentationForm() {
             </label>
             <label>Duration in minutes:
                 <input value={duration} type="number"
-                       onChange={e => setDuration(Number(e.target.value))}/>
+                       onChange={e => setDuration(Number.parseInt(e.target.value))}/>
             </label>
             <p>Ends at: </p>
             <button disabled={!validForm} type={"submit"}>Save Presentation</button>
