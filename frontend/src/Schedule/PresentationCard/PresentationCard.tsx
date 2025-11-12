@@ -42,7 +42,6 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
     const loadUser = () => {
         axios.get("api/auth/me")
             .then(r => {
-                console.log(r.data)
                 setUserRole(r.data.role)
             })
             .catch((e) => console.log(e));
