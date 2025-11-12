@@ -55,20 +55,24 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             const currentSeats = selectedSeats.splice(selectedSeats.indexOf(e), 1)
             setSelectedSeats(currentSeats);
             const element = document.getElementById(e)
-            element.style.backgroundColor = "darkblue"
+            if (element !== null && props.forReservation) {
+                element.style.backgroundColor = "darkblue"
+            }
         } else {
             const currentSeats = selectedSeats;
             currentSeats.push(e)
             setSelectedSeats(currentSeats);
             const element = document.getElementById(e)
-            element.style.backgroundColor = "green"
+            if (element !== null && props.forReservation) {
+                element.style.backgroundColor = "green"
+            }
         }
     }
 
     function onConfirmSeatPosition(e: FormEvent) {
         e.preventDefault();
         if (selectedSeats !== undefined) {
-            props.setSeatPositions(selectedSeats.map((s): SeatPosition =>
+            props.setSeatPositions?.(selectedSeats.map((s): SeatPosition =>
                 ({
                     row: s.substring(0, 1),
                     seatNumber: s.substring(1)
