@@ -34,19 +34,19 @@ export default function Navbar() {
         <div className={"navbar"}>
             {userRole === "GUEST" &&
                 <div className={"links"}>
-                    <Link to={"/"} className={"nav-button"}>Home</Link>
-                    <Link to={"/allPresentations"} className={"nav-button"}>Presentations</Link>
-                    <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
+                    <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
+                    <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
+                    <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
                 </div>
             }
             {userRole === "ADMIN" &&
                 <div className={"links"}>
-                    <Link to={"/"} className={"nav-button"}>Home</Link>
-                    <Link to={"/allPresentations"} className={"nav-button"}>Presentations</Link>
-                    <Link to={"/allMovies"} className={"nav-button"}>All Movies</Link>
-                    <Link to={"/allFavMovies"} className={"nav-button"}>Favourite Movies</Link>
-                    <Link to={"/allHalls"} className={"nav-button"}>Halls</Link>
-                    <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
+                    <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
+                    <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
+                    <Link to={"/allMovies"} className={"nav-button"}><GiVideoCamera/> All Movies</Link>
+                    <Link to={"/allFavMovies"} className={"nav-button"}><GiHearts/> Favourite Movies</Link>
+                    <Link to={"/allHalls"} className={"nav-button"}><GiTheater/> Halls</Link>
+                    <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
                 </div>
             }
             <div className={"button"}>

@@ -46,7 +46,6 @@ export default function AllPresentations() {
     return (
         <div className={"all-presentations"}>
             <div className={"presentations-header"}>
-
                 <h3>All Presentations</h3>
                 {userRole === "ADMIN" &&
                     <button onClick={addNewPresentation}>Add New Presentation</button>
