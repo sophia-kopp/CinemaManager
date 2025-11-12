@@ -3,6 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import './PresentationCard.css';
+import {GiPencil, GiTrashCan, GiClapperboard} from "react-icons/gi";
 
 type PresentationCardProps = {
     presentation: Presentation
@@ -46,9 +47,15 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
             <p>Duration: {props.presentation.duration}</p>
             {!props.displayInfo &&
                 <div>
-                    <button onClick={deletePresentation}>Delete</button>
-                    <button onClick={editPresentation}>Edit</button>
-                    <button onClick={onMakeReservation}>Book this movie</button>
+                    <button onClick={deletePresentation}>
+                        <GiTrashCan/>Delete
+                    </button>
+                    <button onClick={editPresentation}>
+                        <GiPencil/>Edit
+                    </button>
+                    <button onClick={onMakeReservation}>
+                        <GiClapperboard/>Book this movie
+                    </button>
                 </div>
             }
         </div>

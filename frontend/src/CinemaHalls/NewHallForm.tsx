@@ -72,7 +72,7 @@ export default function NewHallForm() {
                 <input defaultValue={hall?.seatsPerRow} onChange={e => setSeatsPerRow(Number(e.target.value))}/>
             </label>
             {hall === undefined && <button type={"submit"}>Submit</button>}
-            {hall !== undefined && <button type={"submit"}>Edit</button>}
+            {hall !== undefined && <button type={"submit"}>Update</button>}
         </form>
     )
 }

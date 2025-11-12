@@ -5,6 +5,8 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {type FormEvent, useEffect, useState} from "react";
 import type {SeatPosition} from "../../model/SeatPosition.ts";
+import { GiPencil,GiTrashCan } from "react-icons/gi";
+
 
 type HallCardProps = {
     hall: CinemaHall
@@ -111,8 +113,10 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             }
             {props.forReservation === false &&
                 <div className={"buttons"}>
-                    <button onClick={onEditHall}>Edit</button>
-                    <button onClick={deleteHall}>Delete</button>
+                    <button onClick={onEditHall}>
+                        <GiPencil/>Edit</button>
+                    <button onClick={deleteHall}>
+                        <GiTrashCan/>Delete</button>
                 </div>
             }
         </div>

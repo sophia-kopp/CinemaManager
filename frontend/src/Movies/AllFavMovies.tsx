@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import type {FavouriteMovie} from "../model/FavouriteMovie.ts";
 import axios from "axios";
 import "./AllFavMovies.css"
+import { GiTrashCan } from "react-icons/gi";
 
 export default function AllFavMovies() {
     const [favMovies, setFavMovies] = useState<FavouriteMovie[]>([]);
@@ -27,7 +28,8 @@ export default function AllFavMovies() {
             {favMovies.map(m =>
                 <div className={"all-fav-movies"}>
                 <h4>{m.name}</h4>
-                <button onClick={()=>deleteFavMovie(m.id)}>Delete</button>
+                <button onClick={()=>deleteFavMovie(m.id)}>
+                    <GiTrashCan />Delete</button>
                 </div>
             )}
         </>

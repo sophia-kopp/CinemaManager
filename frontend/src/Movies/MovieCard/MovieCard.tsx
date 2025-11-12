@@ -1,23 +1,28 @@
 import type {Movie} from "../../model/Movie.ts";
 import './MovieCard.css'
 import axios from "axios";
+import {GiHearts} from "react-icons/gi";
 
-type MovieCardProps={
+type MovieCardProps = {
     movie: Movie
 }
-export default function MovieCard(props: Readonly<MovieCardProps>){
+export default function MovieCard(props: Readonly<MovieCardProps>) {
 
-   function onAddToFavourite(){
-       axios.post("api/favouriteMovies", {id: String(props.movie.id), name: props.movie.title} )
-           .then(r=>console.log(r.data))
-           .catch(e=>console.log(e));
-   }
+    function onAddToFavourite() {
+        axios.post("api/favouriteMovies", {id: String(props.movie.id), name: props.movie.title})
+            .then(r => console.log(r.data))
+            .catch(e => console.log(e));
+    }
 
 
     return (
         <div className={"movie-card"}>
+
             <img src={props.movie.poster_path} alt={"movie-img"}/>
-            <button onClick={onAddToFavourite}>Favourite</button>
+            <button onClick={onAddToFavourite}>
+                <GiHearts color={"red"}/>
+                Add to Favourite
+            </button>
             <h4>{props.movie.title}</h4>
             <p>Release date: {props.movie.release_date}</p>
             <p>Votes: {props.movie.vote_count} - Evaluation: {props.movie.vote_average}</p>
