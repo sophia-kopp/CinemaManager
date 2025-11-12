@@ -56,7 +56,6 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             setSelectedSeats(currentSeats);
             const element = document.getElementById(e)
             element.style.backgroundColor = "darkblue"
-            console.log("e", element)
         } else {
             const currentSeats = selectedSeats;
             currentSeats.push(e)
@@ -64,7 +63,6 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             const element = document.getElementById(e)
             element.style.backgroundColor = "green"
         }
-        console.log(selectedSeats)
     }
 
     function onConfirmSeatPosition(e: FormEvent) {
