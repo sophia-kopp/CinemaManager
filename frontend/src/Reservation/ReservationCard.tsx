@@ -2,6 +2,7 @@ import axios from "axios";
 import type {Reservation} from "../model/Reservation.ts";
 import {GiPerson} from "react-icons/gi";
 import {useEffect, useState} from "react";
+import {GiTrashCan, GiPriceTag} from "react-icons/gi";
 
 type ReservationCardProps = {
     reservation: Reservation
@@ -32,29 +33,25 @@ export default function ReservationCard(props: Readonly<ReservationCardProps>) {
 
     return (
         <div>
-            <p>Id: {props.reservation.id}</p>
-            <p>MovieName: {props.reservation.presentation.movieName}</p>
-            <p>Starts at: {props.reservation.presentation.startsAt.toString()}</p>
-            <p>Amount of Seats: {props.reservation.amountOfSeats}</p>
-            <p>Price: {props.reservation.price}</p>
-            {props.reservation.seatPositions.map(seat =>
-                <p key={seat.row + seat.seatNumber}>Row: {seat.row} - Seat: {seat.seatNumber}</p>
-            )}
-            <button onClick={deleteReservation}>Delete</button>
             <div className={"reservation"}>
                 <div className={"reservation-header"}>
                     <h4>{props.reservation.presentation.movieName}</h4>
                     {!isCopied && <button onClick={() => copyToClipboard(props.reservation.id)}>📎 Copy ID</button>}
                     {isCopied && <button className={"button-copied"}>✓ Copied!</button>}
                 </div>
-                <p>Price: {props.reservation.price} $</p>
                 <p>Date: {props.reservation.presentation.startsAt.toString().substring(0, 10)} -
                     Starts at: {props.reservation.presentation.startsAt.toString().substring(11, 16)}</p>
                 <p><GiPerson/> {props.reservation.amountOfSeats} Person(s)</p>
-                <p>Seats:</p>
-                {props.reservation.seatPositions.map(seat =>
-                    <p>Row: {seat.row.toUpperCase()} - Seat: {seat.seatNumber}</p>
-                )}
+                <p><GiPriceTag/> Price: {props.reservation.price} $</p>
+                <div className={"seat-list"}>
+                    <h5>Seats: </h5>
+                    <div className={"seat-position"}>
+                    {props.reservation.seatPositions.map(seat =>
+                        <p>Row: {seat.row.toUpperCase()} - Seat: {seat.seatNumber}</p>
+                    )}
+                    </div>
+                </div>
+                <button onClick={deleteReservation}><GiTrashCan/>Delete</button>
             </div>
         </div>
     )
