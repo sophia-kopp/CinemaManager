@@ -49,14 +49,6 @@ export default function Navbar() {
                     <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
                 </div>
             }
-            <div className={"links"}>
-                <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
-                <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
-                <Link to={"/allMovies"} className={"nav-button"}><GiVideoCamera/> All Movies</Link>
-                <Link to={"/allFavMovies"} className={"nav-button"}><GiHearts/> Favourite Movies</Link>
-                <Link to={"/allHalls"} className={"nav-button"}><GiTheater/> Halls</Link>
-                <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
-            </div>
             <div className={"button"}>
                 <button onClick={logout}><GiExitDoor/> Logout</button>
             </div>
