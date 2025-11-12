@@ -12,3 +12,15 @@
 :hover{
     filter: drop-shadow(0 0 2em #646cffaa);
 }
+.reservation-header{
+    display: flex;
+    flex-direction: column;
+    justify-content : center;
+    button{
+        align-self: center;
+        width: max-content;
+        height: max-content;
+        float: right;
+        margin: 0;
+    }
+}
