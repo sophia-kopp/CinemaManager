@@ -2,6 +2,7 @@ import {type FormEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import type {CinemaHallDto} from "../model/CinemaHall.ts";
+import "./NewHallForm.css";
 
 export default function NewHallForm() {
 
@@ -62,13 +63,13 @@ export default function NewHallForm() {
 
     return (
         <form onSubmit={handlePostForm}>
-            <label>Name:
+            <label>Hall Name:
                 <input defaultValue={name} onChange={e => setName(e.target.value)}/>
             </label>
-            <label>How many rows do you want?
+            <label>How many rows does the cinema hall have?
                 <input defaultValue={hall?.rows} onChange={e => setRows(Number(e.target.value))}/>
             </label>
-            <label>How many seats per row do you want?
+            <label>How many seats per row does the cinema hall have?
                 <input defaultValue={hall?.seatsPerRow} onChange={e => setSeatsPerRow(Number(e.target.value))}/>
             </label>
             {hall === undefined && <button type={"submit"}>Submit</button>}
