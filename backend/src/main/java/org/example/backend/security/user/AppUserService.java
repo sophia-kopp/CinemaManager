@@ -14,6 +14,6 @@ public class AppUserService {
     }
 
     public AppUser getUser(OAuth2User user) {
-        return userRepo.findById(user.getName()).orElseThrow(() -> new UserNotFoundException("User not found with id"));
+        return userRepo.findById(user.getName()).orElseThrow(() -> new UserNotFoundException("User not found with id: " + user.getAttribute("login")));
     }
 }
