@@ -1,0 +1,14 @@
+.reservation {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+        border: 1px solid white;
+        border-radius: 5px;
+        width: 50%;
+        margin: 5px;
+
+
+}
+:hover{
+    filter: drop-shadow(0 0 2em #646cffaa);
+}
