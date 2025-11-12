@@ -13,9 +13,10 @@ export default function AllReservations() {
             .catch(e => console.log(e))
     }
 
-    function updateReservations(){
+    function updateReservations() {
         loadAllReservations();
     }
+
     useEffect(() => {
         loadAllReservations();
     }, []);
@@ -24,7 +25,8 @@ export default function AllReservations() {
         <>
             <h3>All Reservations</h3>
             {reservations.map(reservation =>
-                <ReservationCard reservation={reservation} updateReservations={updateReservations}/>
+                <ReservationCard key={reservation.id} reservation={reservation}
+                                 updateReservations={updateReservations}/>
             )}
         </>
     )

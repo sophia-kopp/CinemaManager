@@ -21,7 +21,7 @@ export default function ReservationCard(props: Readonly<ReservationCardProps>){
             <p>Amount of Seats: {props.reservation.amountOfSeats}</p>
             <p>Price: {props.reservation.price}</p>
             {props.reservation.seatPositions.map(seat =>
-                <p>Row: {seat.row} - Seat: {seat.seatNumber}</p>
+                <p key={seat.row + seat.seatNumber}>Row: {seat.row} - Seat: {seat.seatNumber}</p>
             )}
             <button onClick={deleteReservation}>Delete</button>
         </div>

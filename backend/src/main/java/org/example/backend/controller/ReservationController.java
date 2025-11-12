@@ -3,7 +3,6 @@ package org.example.backend.controller;
 import org.example.backend.model.Reservation;
 import org.example.backend.model.ReservationDto;
 import org.example.backend.service.ReservationService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

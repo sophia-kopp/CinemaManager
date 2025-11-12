@@ -1,6 +1,5 @@
 package org.example.backend.service;
 
-import org.example.backend.exceptions.PresentationNotFoundException;
 import org.example.backend.exceptions.ReservationNotFoundException;
 import org.example.backend.model.*;
 import org.example.backend.repo.ReservationRepo;
