@@ -1,5 +1,6 @@
 package org.example.backend.service;
 
+import org.example.backend.exceptions.ReservationNotFoundException;
 import org.example.backend.model.*;
 import org.example.backend.repo.ReservationRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,5 +77,18 @@ class ReservationServiceTest {
         //THEN
         verify(mockRepo).save(reservation);
         assertEquals(reservation, actual);
+    }
+
+    @Test
+    void deleteReservation_shouldThrowException_WhenNoPresentationFound(){
+        //WHEN
+
+        doNothing().when(mockRepo).deleteById("1");
+        when(mockRepo.existsById("1")).thenReturn(false);
+
+        ReservationNotFoundException exception = assertThrows(ReservationNotFoundException.class, () ->
+                service.deleteReservationById("1"));
+
+        assertEquals("Reservation not found with id: 1", exception.getMessage());
     }
 }

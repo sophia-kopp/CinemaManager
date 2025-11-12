@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import type {Reservation} from "../model/Reservation.ts";
 import axios from "axios";
+import ReservationCard from "./ReservationCard.tsx";
 
 export default function AllReservations() {
 
@@ -12,6 +13,10 @@ export default function AllReservations() {
             .catch(e => console.log(e))
     }
 
+    function updateReservations() {
+        loadAllReservations();
+    }
+
     useEffect(() => {
         loadAllReservations();
     }, []);
@@ -20,17 +25,8 @@ export default function AllReservations() {
         <>
             <h3>All Reservations</h3>
             {reservations.map(reservation =>
-                <div>
-                    <p>Id: {reservation.id}</p>
-                    <p>MovieName: {reservation.presentation.movieName}</p>
-                    <p>Starts at: {reservation.presentation.startsAt.toString()}</p>
-                    <p>Amount of Seats: {reservation.amountOfSeats}</p>
-                    <p>Price: {reservation.price}</p>
-                     {reservation.seatPositions.map(seat =>
-                         <p>Row: {seat.row} - Seat: {seat.seatNumber}</p>
-                    )}
-                </div>
-
+                <ReservationCard key={reservation.id} reservation={reservation}
+                                 updateReservations={updateReservations}/>
             )}
         </>
     )
