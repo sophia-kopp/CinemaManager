@@ -24,6 +24,7 @@ export default function ReservationForm() {
     const [amountOfSeats, setAmountOfSeats] = useState<number>(0);
     const [hall, setHall] = useState<CinemaHall | undefined>(undefined);
     const [seatPositions, setSeatPositions] = useState<SeatPosition[]>([]);
+    const [disableSubmitButton, setDisableSubmitButton] = useState<boolean>(false);
 
     const param = useParams();
     const nav = useNavigate();
@@ -42,15 +43,25 @@ export default function ReservationForm() {
         }
     }
 
-    function saveReservation(e:FormEvent) {
+    function saveReservation(e: FormEvent) {
         e.preventDefault();
         axios.post("/api/reservations",
-            {presentation: presentation,
-            amountOfSeats: seatPositions.length,
-            seatPositions: seatPositions,
-            price: price})
+            {
+                presentation: presentation,
+                amountOfSeats: seatPositions.length,
+                seatPositions: seatPositions,
+                price: price
+            })
             .then(() => nav("/allReservations"))
             .catch(e => console.log(e))
+    }
+
+    function onDisableSubmitButton() {
+        if (seatPositions.length === 0) {
+            setDisableSubmitButton(true)
+        } else {
+            setDisableSubmitButton(false)
+        }
     }
 
     useEffect(() => {
@@ -69,12 +80,15 @@ export default function ReservationForm() {
     }, [amountOfSeats]);
     useEffect(() => {
         setAmountOfSeats(seatPositions.length)
+
     }, [seatPositions]);
 
     useEffect(() => {
         setPriceTotal(price - discount)
     }, [discount, price]);
-
+    useEffect(() => {
+        onDisableSubmitButton()
+    }, [seatPositions]);
 
     return (
         <div className={"reservation-form"}>
@@ -83,7 +97,7 @@ export default function ReservationForm() {
                 {hall !== undefined &&
                     <HallCard hall={hall} forReservation={true} setSeatPositions={setSeatPositions}/>
                 }
-                <button type={"submit"}>Reserve</button>
+                <button disabled={disableSubmitButton} type={"submit"}>Reserve</button>
             </form>
             <p>Amount of Seats: {amountOfSeats}</p>
             <p>Price: {price}</p>
