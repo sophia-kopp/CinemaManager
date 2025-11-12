@@ -35,6 +35,20 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
     useEffect(() => {
         calculateEndsAt()
     }, []);
+    const [userRole, setUserRole] = useState<string>("");
+
+    const loadUser = () => {
+        axios.get("api/auth/me")
+            .then(r => {
+                console.log(r.data)
+                setUserRole(r.data.role)
+            })
+            .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        loadUser()
+    }, []);
 
     return (
         <div>
@@ -45,8 +59,12 @@ export default function PresentationCard(props: Readonly<PresentationCardProps>)
             <p>Duration: {props.presentation.duration}</p>
             {!props.displayInfo &&
                 <div>
+                    {userRole==="ADMIN" &&
+                    <div>
+
                     <button onClick={deletePresentation}>Delete</button>
                     <button onClick={editPresentation}>Edit</button>
+                    </div>}
                     <button onClick={onMakeReservation}>Book this movie</button>
                 </div>
             }

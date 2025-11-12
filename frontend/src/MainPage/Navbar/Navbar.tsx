@@ -1,25 +1,52 @@
 import {Link} from "react-router-dom";
 import './Navbar.css';
+import axios from "axios";
+import {useEffect, useState} from "react";
 
-export default function Navbar(){
+export default function Navbar() {
 
-    function logout(){
+    const [userRole, setUserRole] = useState<string>("");
 
-            const host: string = window.location.host === "localhost:5173" ?
-                "http://localhost:8080"
-                :
-                window.location.origin;
-            window.open(host + "/logout", "_self")
+    function logout() {
+
+        const host: string = window.location.host === "localhost:5173" ?
+            "http://localhost:8080"
+            :
+            window.location.origin;
+        window.open(host + "/logout", "_self")
     }
+
+    const loadUser = () => {
+        axios.get("api/auth/me")
+            .then(r => {
+                setUserRole(r.data.role)
+            })
+            .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        loadUser()
+    }, []);
 
     return (
         <div className={"navbar"}>
-            <Link to={"/"} className={"nav-button"}>Home</Link>
-            <Link to={"/allPresentations"} className={"nav-button"}>Presentations</Link>
-            <Link to={"/allMovies"} className={"nav-button"}>All Movies</Link>
-            <Link to={"/allFavMovies"} className={"nav-button"}>Favourite Movies</Link>
-            <Link to={"/allHalls"} className={"nav-button"}>Halls</Link>
-            <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
+            {userRole === "GUEST" &&
+                <div>
+                    <Link to={"/"} className={"nav-button"}>Home</Link>
+                    <Link to={"/allPresentations"} className={"nav-button"}>Presentations</Link>
+                    <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
+                </div>
+            }
+            {userRole === "ADMIN" &&
+                <div>
+                    <Link to={"/"} className={"nav-button"}>Home</Link>
+                    <Link to={"/allPresentations"} className={"nav-button"}>Presentations</Link>
+                    <Link to={"/allMovies"} className={"nav-button"}>All Movies</Link>
+                    <Link to={"/allFavMovies"} className={"nav-button"}>Favourite Movies</Link>
+                    <Link to={"/allHalls"} className={"nav-button"}>Halls</Link>
+                    <Link to={"/allReservations"} className={"nav-button"}>Reservations</Link>
+                </div>
+            }
             <button onClick={logout}>Logout</button>
         </div>
     )

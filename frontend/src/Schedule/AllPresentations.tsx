@@ -27,11 +27,26 @@ export default function AllPresentations() {
     function addNewPresentation() {
         nav("/newPresentation");
     }
+    const [userRole, setUserRole] = useState<string>("");
+
+    const loadUser = () => {
+        axios.get("api/auth/me")
+            .then(r => {
+                setUserRole(r.data.role)
+            })
+            .catch((e) => console.log(e));
+    }
+
+    useEffect(() => {
+        loadUser()
+    }, []);
 
     return (
         <>
             <h3>All Presentations</h3>
-            <button onClick={addNewPresentation}>Add New Presentation</button>
+            {userRole==="ADMIN" &&
+                <button onClick={addNewPresentation}>Add New Presentation</button>
+            }
             {presentations.map(p =>
                 <PresentationCard presentation={p} deletePresentation={setDeletePresentation}/>
             )}
