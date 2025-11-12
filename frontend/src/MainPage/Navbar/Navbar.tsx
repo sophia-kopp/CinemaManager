@@ -32,23 +32,21 @@ export default function Navbar() {
 
     return (
         <div className={"navbar"}>
-            {userRole === "GUEST" &&
-                <div className={"links"}>
-                    <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
-                    <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
-                    <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
-                </div>
-            }
-            {userRole === "ADMIN" &&
-                <div className={"links"}>
-                    <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
-                    <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
+            <div className={"links"}>
+                <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
+                <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
+                {userRole === "ADMIN" &&
                     <Link to={"/allMovies"} className={"nav-button"}><GiVideoCamera/> All Movies</Link>
+                }
+                {userRole === "ADMIN" &&
                     <Link to={"/allFavMovies"} className={"nav-button"}><GiHearts/> Favourite Movies</Link>
+                }
+                {userRole === "ADMIN" &&
                     <Link to={"/allHalls"} className={"nav-button"}><GiTheater/> Halls</Link>
-                    <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
-                </div>
-            }
+                }
+                <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
+            </div>
+
             <div className={"button"}>
                 <button onClick={logout}><GiExitDoor/> Logout</button>
             </div>
