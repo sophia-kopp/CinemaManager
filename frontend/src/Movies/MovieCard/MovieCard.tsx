@@ -16,8 +16,8 @@ export default function MovieCard(props: Readonly<MovieCardProps>){
 
     return (
         <div className={"movie-card"}>
-            <button onClick={onAddToFavourite}>Favourite</button>
             <img src={props.movie.poster_path} alt={"movie-img"}/>
+            <button onClick={onAddToFavourite}>Favourite</button>
             <h4>{props.movie.title}</h4>
             <p>Release date: {props.movie.release_date}</p>
             <p>Votes: {props.movie.vote_count} - Evaluation: {props.movie.vote_average}</p>

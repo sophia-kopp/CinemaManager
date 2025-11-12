@@ -6,6 +6,7 @@ import PresentationCard from "../Schedule/PresentationCard/PresentationCard.tsx"
 import HallCard from "../CinemaHalls/HallCard/HallCard.tsx";
 import type {CinemaHall} from "../model/CinemaHall.ts";
 import type {SeatPosition} from "../model/SeatPosition.ts";
+import "./ReservationForm.css";
 
 
 export default function ReservationForm() {
@@ -66,6 +67,9 @@ export default function ReservationForm() {
         setPrice(amountOfSeats * 10)
         setDiscount(amountOfSeats * 10)
     }, [amountOfSeats]);
+    useEffect(() => {
+        setAmountOfSeats(seatPositions.length)
+    }, [seatPositions]);
 
     useEffect(() => {
         setPriceTotal(price - discount)
@@ -73,7 +77,7 @@ export default function ReservationForm() {
 
 
     return (
-        <div>
+        <div className={"reservation-form"}>
             <PresentationCard presentation={presentation} displayInfo={true}/>
             <form onSubmit={saveReservation}>
                 {hall !== undefined &&
@@ -81,7 +85,7 @@ export default function ReservationForm() {
                 }
                 <button type={"submit"}>Reserve</button>
             </form>
-            <p>Amount of Seats: {seatPositions.length}</p>
+            <p>Amount of Seats: {amountOfSeats}</p>
             <p>Price: {price}</p>
             <p>Discount: {price}</p>
             <p>Total: {priceTotal}</p>
