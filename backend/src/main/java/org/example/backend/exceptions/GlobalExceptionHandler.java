@@ -25,4 +25,9 @@ public class GlobalExceptionHandler {
     public String handlePresentationNotFoundException(PresentationNotFoundException e) {
         return e.getMessage();
     }
+    @ExceptionHandler(ReservationNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleReservationNotFoundException(ReservationNotFoundException e) {
+        return e.getMessage();
+    }
 }

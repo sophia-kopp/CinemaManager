@@ -3,6 +3,8 @@ import type {Reservation} from "../model/Reservation.ts";
 import axios from "axios";
 import "./AllReservations.css";
 import {GiPerson} from "react-icons/gi";
+import ReservationCard from "./ReservationCard.tsx";
+
 
 export default function AllReservations() {
 
@@ -13,7 +15,12 @@ export default function AllReservations() {
             .then(r => setReservations(r.data))
             .catch(e => console.log(e))
     }
-
+    function updateReservations() {
+        loadAllReservations();
+    }
+    useEffect(() => {
+        loadAllReservations();
+    }, []);
     const [isCopied, setIsCopied] = useState(false);
 
     useEffect(() => {
@@ -52,6 +59,10 @@ export default function AllReservations() {
                         <p>Row: {seat.row.toUpperCase()} - Seat: {seat.seatNumber}</p>
                     )}
                 </div>
+            )}
+            {reservations.map(reservation =>
+                <ReservationCard key={reservation.id} reservation={reservation}
+                                 updateReservations={updateReservations}/>
             )}
         </>
     )
