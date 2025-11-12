@@ -13,8 +13,7 @@ public class AppUserService {
         this.userRepo = userRepo;
     }
 
-    public AppUser getUser(OAuth2User user){
-        return userRepo.findById(user.getName()).orElseThrow(()->new UserNotFoundException("User not found with id"));
-       // return userRepo.findById(userId).orElseThrow(()->new UserNotFoundException("User not found with id" + userId));
+    public AppUser getUser(OAuth2User user) {
+        return userRepo.findById(user.getName()).orElseThrow(() -> new UserNotFoundException("User not found with id"));
     }
 }
