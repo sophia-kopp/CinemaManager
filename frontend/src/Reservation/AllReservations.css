@@ -28,7 +28,6 @@ button {
     align-self: center;
     width: max-content;
     height: max-content;
-    float: right;
 }
 
 .seat-list {
@@ -36,7 +35,7 @@ button {
     flex-direction: row;
     justify-content: center;
     align-self: center;
-    border: 2px solid black;
+    border: 2px solid #535bf2;
     border-radius: 5px;
     width: max-content;
     margin-bottom: 5px;
