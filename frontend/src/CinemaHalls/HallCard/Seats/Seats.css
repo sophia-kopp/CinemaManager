@@ -4,7 +4,7 @@
     background-color: transparent;
     border-radius: 50%;
     display: inline-block;
-    margin: 1px;
+    margin: 3px;
     border:  1px solid darkblue;
 }
 .circle:hover{

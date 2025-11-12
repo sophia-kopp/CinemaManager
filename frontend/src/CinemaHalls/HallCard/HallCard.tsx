@@ -5,7 +5,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {type FormEvent, useEffect, useState} from "react";
 import type {SeatPosition} from "../../model/SeatPosition.ts";
-import { GiPencil,GiTrashCan } from "react-icons/gi";
+import {GiPencil, GiTrashCan} from "react-icons/gi";
 
 
 type HallCardProps = {
@@ -91,14 +91,15 @@ export default function HallCard(props: Readonly<HallCardProps>) {
                 </div>
                 {[...rows].map((row) =>
                     <div key={row} className={"seatsPerRow"}>
-                        {row.toUpperCase()}
+                        <p>{row.toUpperCase()}</p>
                         {[...seatNumber].map((seat) => {
-                                return <div className={"seats"} key={seat} id={row+seat} onClick={() => onSelectSeatPositions(row + seat)}>
+                                return <div className={"seats"} key={seat} id={row + seat}
+                                            onClick={() => onSelectSeatPositions(row + seat)}>
                                     <Seat seatNumber={seat}/>
                                 </div>
                             }
                         )}
-                        {row.toUpperCase()}
+                        <p>{row.toUpperCase()}</p>
                     </div>
                 )}
             </div>
@@ -112,9 +113,11 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             {props.forReservation === false &&
                 <div className={"buttons"}>
                     <button onClick={onEditHall}>
-                        <GiPencil/>Edit</button>
+                        <GiPencil/>Edit
+                    </button>
                     <button onClick={deleteHall}>
-                        <GiTrashCan/>Delete</button>
+                        <GiTrashCan/>Delete
+                    </button>
                 </div>
             }
         </div>
