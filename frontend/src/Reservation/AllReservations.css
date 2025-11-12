@@ -1,0 +1,53 @@
+.reservation {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 50%;
+    margin: 5px;
+
+
+}
+
+:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.reservation-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3, h4 {
+        font-size: larger;
+    }
+}
+
+button {
+    align-self: center;
+    width: max-content;
+    height: max-content;
+}
+
+.seat-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    border: 2px solid #535bf2;
+    border-radius: 5px;
+    width: max-content;
+    margin-bottom: 5px;
+    padding: 10px;
+
+    h5 {
+        font-size: larger;
+        align-content: center;
+    }
+
+    .seat-position {
+        margin-left: 50px;
+        flex-direction: column;
+    }
+}

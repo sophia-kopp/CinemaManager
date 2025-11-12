@@ -5,6 +5,8 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {type FormEvent, useEffect, useState} from "react";
 import type {SeatPosition} from "../../model/SeatPosition.ts";
+import {GiPencil, GiTrashCan} from "react-icons/gi";
+
 
 type HallCardProps = {
     hall: CinemaHall
@@ -53,22 +55,24 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             const currentSeats = selectedSeats.splice(selectedSeats.indexOf(e), 1)
             setSelectedSeats(currentSeats);
             const element = document.getElementById(e)
-            element.style.backgroundColor = "darkblue"
-            console.log("e", element)
+            if (element !== null && props.forReservation) {
+                element.style.backgroundColor = "darkblue"
+            }
         } else {
             const currentSeats = selectedSeats;
             currentSeats.push(e)
             setSelectedSeats(currentSeats);
             const element = document.getElementById(e)
-            element.style.backgroundColor = "green"
+            if (element !== null && props.forReservation) {
+                element.style.backgroundColor = "green"
+            }
         }
-        console.log(selectedSeats)
     }
 
     function onConfirmSeatPosition(e: FormEvent) {
         e.preventDefault();
         if (selectedSeats !== undefined) {
-            props.setSeatPositions(selectedSeats.map((s): SeatPosition =>
+            props.setSeatPositions?.(selectedSeats.map((s): SeatPosition =>
                 ({
                     row: s.substring(0, 1),
                     seatNumber: s.substring(1)
@@ -91,14 +95,15 @@ export default function HallCard(props: Readonly<HallCardProps>) {
                 </div>
                 {[...rows].map((row) =>
                     <div key={row} className={"seatsPerRow"}>
-                        {row.toUpperCase()}
+                        <p>{row.toUpperCase()}</p>
                         {[...seatNumber].map((seat) => {
-                                return <div className={"seats"} key={seat} id={row+seat} onClick={() => onSelectSeatPositions(row + seat)}>
+                                return <div className={"seats"} key={seat} id={row + seat}
+                                            onClick={() => onSelectSeatPositions(row + seat)}>
                                     <Seat seatNumber={seat}/>
                                 </div>
                             }
                         )}
-                        {row.toUpperCase()}
+                        <p>{row.toUpperCase()}</p>
                     </div>
                 )}
             </div>
@@ -111,8 +116,12 @@ export default function HallCard(props: Readonly<HallCardProps>) {
             }
             {props.forReservation === false &&
                 <div className={"buttons"}>
-                    <button onClick={onEditHall}>Edit</button>
-                    <button onClick={deleteHall}>Delete</button>
+                    <button onClick={onEditHall}>
+                        <GiPencil/>Edit
+                    </button>
+                    <button onClick={deleteHall}>
+                        <GiTrashCan/>Delete
+                    </button>
                 </div>
             }
         </div>

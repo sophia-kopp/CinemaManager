@@ -1,7 +1,9 @@
 import {useEffect, useState} from "react";
 import type {Reservation} from "../model/Reservation.ts";
 import axios from "axios";
+import "./AllReservations.css";
 import ReservationCard from "./ReservationCard.tsx";
+
 
 export default function AllReservations() {
 
@@ -12,10 +14,13 @@ export default function AllReservations() {
             .then(r => setReservations(r.data))
             .catch(e => console.log(e))
     }
-
     function updateReservations() {
         loadAllReservations();
     }
+    useEffect(() => {
+        loadAllReservations();
+    }, []);
+
 
     useEffect(() => {
         loadAllReservations();

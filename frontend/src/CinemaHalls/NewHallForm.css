@@ -1,0 +1,15 @@
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 5px;
+    width: max-content;
+    justify-self: center;
+    label{
+        display: contents;
+    }
+    button {
+        width: max-content;
+        align-self: center;
+    }
+}
