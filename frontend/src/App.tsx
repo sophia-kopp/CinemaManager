@@ -15,6 +15,7 @@ import {useState} from "react";
 import Login from "./MainPage/Login.tsx";
 import AllReservations from "./Reservation/AllReservations.tsx";
 import ReservationForm from "./Reservation/ReservationForm.tsx";
+import Impressum from "./MainPage/Impressum.tsx";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                         <Route path={"/editPresentation/:id"} element={<PresentationForm/>}/>
                         <Route path={"/allReservations"} element={<AllReservations/>}/>
                         <Route path={"/newReservation/:id"} element={<ReservationForm/>}/>
+                        <Route path={"/impressum"} element={<Impressum/>}/>
                     </Route>
                 </Routes>
             </div>
