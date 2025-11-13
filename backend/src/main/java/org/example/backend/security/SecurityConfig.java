@@ -36,7 +36,7 @@ public class SecurityConfig {
                 )
                 .logout(l-> l.logoutSuccessUrl(sucessUrl))
                 .oauth2Login(o -> o
-                        .defaultSuccessUrl("http://localhost:5173"));
+                        .defaultSuccessUrl(sucessUrl));
         return http.build();
     }
 }
