@@ -33,8 +33,12 @@ export default function Navbar() {
     return (
         <div className={"navbar"}>
             <div className={"links"}>
-                <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
-                <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
+                {(userRole === "ADMIN" || userRole === "GUEST") &&
+                    <Link to={"/"} className={"nav-button"}><GiHouse/> Home</Link>
+                }
+                {(userRole === "ADMIN" || userRole === "GUEST") &&
+                    <Link to={"/allPresentations"} className={"nav-button"}><GiClapperboard/> Presentations</Link>
+                }
                 {userRole === "ADMIN" &&
                     <Link to={"/allMovies"} className={"nav-button"}><GiVideoCamera/> All Movies</Link>
                 }
@@ -44,7 +48,9 @@ export default function Navbar() {
                 {userRole === "ADMIN" &&
                     <Link to={"/allHalls"} className={"nav-button"}><GiTheater/> Halls</Link>
                 }
+                {(userRole === "ADMIN" || userRole === "GUEST") &&
                 <Link to={"/allReservations"} className={"nav-button"}><GiTicket/> Reservations</Link>
+                }
             </div>
 
             <div className={"button"}>
